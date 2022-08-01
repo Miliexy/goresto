@@ -18,22 +18,18 @@ class WelcomeContent extends StatelessWidget {
         Text(
           "GORESTO",
           style: TextStyle(
-            fontSize: getProportionateScreenWidth(120),
+            fontSize: 35,
             color: kPrimaryColor,
             fontWeight: FontWeight.bold,
           ),
-        ),
-        Text(
-          text,
-          textAlign: TextAlign.center,
         ),
         Spacer(
           flex: 2,
         ),
         Image.asset(
           image,
-          height: getProportionateScreenHeight(300),
-          width: getProportionateScreenWidth(600),
+          height: SizeConfig.blockSizeVertical * 50,
+          width: SizeConfig.blockSizeHorizontal * 85
         ), Spacer(),
       ],
     );

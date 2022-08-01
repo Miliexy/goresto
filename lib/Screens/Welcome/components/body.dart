@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:goresto/Screens/Home/home_screen.dart';
 import 'package:goresto/Screens/components/default_button.dart';
 import 'package:goresto/constansts.dart';
+import 'package:goresto/routes.dart';
 import 'package:goresto/size_config.dart';
 import 'package:location/location.dart';
 
@@ -18,7 +19,7 @@ class _BodyState extends State<Body> {
   int currentPage = 0;
   List<Map<String, String>> welcomeData = [
     {"text": "hello world 1", "image": "assets/images/image.webp"},
-    {"text": "hello world 2", "image": "assets/images/placeholder-image.png"},
+    {"text": "hello world 2", "image": "assets/images/placeholder.png"},
     {"text": "hello world 3", "image": "assets/images/pngegg.png"},
   ];
 
@@ -27,11 +28,12 @@ class _BodyState extends State<Body> {
   Widget build(BuildContext context) {
     return SafeArea(
       child: SizedBox(
+        height: SizeConfig.blockSizeVertical * 80,
         width: double.infinity,
         child: Column(
           children: <Widget>[
             Expanded(
-              flex: 3,
+              flex: 4,
               child: PageView.builder(
                 controller: _pageController,
                 onPageChanged: (value) {
@@ -47,7 +49,6 @@ class _BodyState extends State<Body> {
               ),
             ),
             Expanded(
-              flex: 2,
               child: Padding(
                 padding: EdgeInsets.symmetric(horizontal: getProportionateScreenWidth(20)),
                 child: Row(
@@ -55,7 +56,6 @@ class _BodyState extends State<Body> {
                       Expanded(child: TextButton(
                         onPressed: (){
                           //open camera and take picture and save it to storage
-
                         },
                         child: Text("skip", style: TextStyle(color: kPrimaryColor)),
                         style: ButtonStyle(
@@ -73,7 +73,7 @@ class _BodyState extends State<Body> {
                         _pageController.nextPage(duration: Duration(milliseconds: 300), curve: Curves.easeInOut);
                         //redirect to home screen if last page
                         if(currentPage == welcomeData.length - 1){
-                          Navigator.pushNamed(context, HomeScreen.routeName);
+                          Navigator.of(context).push(createRoute());
                         }
                       }),),
                     ],

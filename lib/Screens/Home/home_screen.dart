@@ -10,10 +10,6 @@ class HomeScreen extends StatelessWidget {
   Widget build(BuildContext context) {
     SizeConfig().init(context);
     return Scaffold(
-      appBar: AppBar(
-        title: Text("hello world"),
-
-      ),
       body: Body(),
       bottomNavigationBar: BottomNavigationBar(
         items: [
