@@ -50,7 +50,9 @@ class _BodyState extends State<Body> {
           SizedBox(height: 10),
           ItemCard(radius: radius, height: height, width: width, index: 1,),
           CarouselSlider(
-            options: CarouselOptions(height: height*30),
+            options: CarouselOptions(autoPlayCurve: Curves.bounceInOut,
+            enlargeCenterPage: true,
+                enlargeStrategy: CenterPageEnlargeStrategy.height),
             items: [1,2,3,4,5].map((i) {
               return Builder(
                 builder: (BuildContext context) {

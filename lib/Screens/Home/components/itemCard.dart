@@ -17,6 +17,7 @@ class ItemCard extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Container(
+      height: height * 30,
       clipBehavior: Clip.hardEdge,
       decoration: BoxDecoration(
           borderRadius: BorderRadius.all(radius),
@@ -34,14 +35,12 @@ class ItemCard extends StatelessWidget {
           Column(
             children: [
               Container(
-                width: constraints.maxWidth,
-                height: constraints.maxHeight * 0.6,
-                child: Container(
-                    decoration: BoxDecoration(
-                        image: DecorationImage(
-                            image: AssetImage("assets/images/image.webp"),
-                            fit: BoxFit.cover))),
-              ),
+                  width: constraints.maxWidth,
+                  height: constraints.maxHeight * 0.6,
+                  decoration: BoxDecoration(
+                      image: DecorationImage(
+                          image: AssetImage("assets/images/image.webp"),
+                          fit: BoxFit.cover))),
               Container(
                 color: Colors.white,
                 width: constraints.maxWidth,
