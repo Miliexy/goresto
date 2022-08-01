@@ -5,11 +5,11 @@ name: CI
 on:
   # Triggers the workflow on push or pull request events but only for the main branch
   push:
-    branches: [master]
+    branches: [goresto-cd]
     paths-ignore:
       - '**/README.md'
   pull_request:
-    branches: [master]
+    branches: [goresto-cd]
 
   # Allows you to run this workflow manually from the Actions tab
   workflow_dispatch:
@@ -27,9 +27,23 @@ jobs:
           with:
             distribution: 'zulu'
             java-version: '11'
+        - uses: actions/checkout@v3
         - uses: subosito/flutter-action@v2
           with:
-            flutter-version: '3.0.5'
+            channel: 'stable'
+            cache: true
+        - run: flutter --version
         - run: flutter pub get
         - run: flutter build apk
         - run: flutter build appbundle
+        - name: Upload APK
+          uses: actions/upload-artifact@v3
+          with:
+            name: release-apk
+            path: build/app/outputs/apk/release/app-release.apk
+
+        - name: Upload Screenshoots
+          uses: actions/upload-artifact@v3
+          with:
+            name: Test result screenshots
+            path: screenshots/*.png
