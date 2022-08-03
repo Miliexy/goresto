@@ -1,10 +1,10 @@
 import 'package:flutter/material.dart';
-import 'package:goresto/Screens/Home/home_screen.dart';
+import 'package:geocoding/geocoding.dart';
 import 'package:goresto/Screens/components/default_button.dart';
+import 'package:goresto/Services/location.dart';
 import 'package:goresto/constansts.dart';
 import 'package:goresto/routes.dart';
 import 'package:goresto/size_config.dart';
-import 'package:location/location.dart';
 
 import 'welcome_content.dart';
 
@@ -16,6 +16,8 @@ class Body extends StatefulWidget {
 }
 
 class _BodyState extends State<Body> {
+  final GetLocation getLocation = new GetLocation();
+  List<Placemark>? _placemark;
   int currentPage = 0;
   List<Map<String, String>> welcomeData = [
     {"text": "hello world 1", "image": "assets/images/image.webp"},
@@ -54,10 +56,11 @@ class _BodyState extends State<Body> {
                 child: Row(
                     children: <Widget>[
                       Expanded(child: TextButton(
-                        onPressed: (){
-                          //open camera and take picture and save it to storage
+                        onPressed: () async {
+                          Navigator.of(context).push(createRoute());
+                          _placemark = await getLocation.getCurrentLocation();
                         },
-                        child: Text("skip", style: TextStyle(color: kPrimaryColor)),
+                        child: Text("Test", style: TextStyle(color: kPrimaryColor)),
                         style: ButtonStyle(
                           shape: MaterialStateProperty.all(CircleBorder()),
                           backgroundColor: MaterialStateProperty.all(Colors.transparent)
