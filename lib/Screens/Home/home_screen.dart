@@ -10,15 +10,12 @@ class HomeScreen extends StatelessWidget {
   Widget build(BuildContext context) {
     SizeConfig().init(context);
     return Scaffold(
-      appBar: AppBar(
-        title: Text("hello world"),
-
-      ),
-      body: Body(),
+      body: const Body(),
       bottomNavigationBar: BottomNavigationBar(
-        items: [
+        items: const [
           BottomNavigationBarItem(icon: Icon(Icons.home), label: "home"),
-          BottomNavigationBarItem(icon: Icon(Icons.favorite), label: "fav")
+          BottomNavigationBarItem(icon: Icon(Icons.search), label: "search"),
+          BottomNavigationBarItem(icon: Icon(Icons.favorite), label: "fav"),
         ],
       ),
     );
