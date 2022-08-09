@@ -1,9 +1,8 @@
-import 'package:carousel_slider/carousel_slider.dart';
 import 'package:flutter/material.dart';
+import 'package:goresto/Screens/Home/components/cityGallery.dart';
+import 'package:goresto/Screens/Home/components/galeryCarousel.dart';
 import 'package:goresto/Screens/Home/components/homeTop.dart';
 import 'package:goresto/size_config.dart';
-
-import 'itemCard.dart';
 
 class Body extends StatefulWidget {
   const Body({Key? key}) : super(key: key);
@@ -13,16 +12,46 @@ class Body extends StatefulWidget {
 }
 
 class _BodyState extends State<Body> {
+  List<Map<String, String>> testList = [
+    {
+      "name": "Something",
+      "description": "a something restaurant",
+      "image": "assets/images/image.webp"
+    },
+    {
+      "name": "Another",
+      "description": "a Another restaurant",
+      "image": "assets/images/placeholder.png"
+    }
+  ];
+  List<Map<String, String>> testCities = [
+    {
+      "name": "Casablanca",
+      "count": "3 restaurants",
+      "image": "assets/images/image.webp"
+    },
+    {
+      "name": "Tangier",
+      "count": "2 restaurants",
+      "image": "assets/images/image.webp"
+    },
+    {
+      "name": "Marrakech",
+      "count": "2 restaurants",
+      "image": "assets/images/image.webp"
+    }
+  ];
+
   @override
   Widget build(BuildContext context) {
     double height = SizeConfig.blockSizeVertical;
     double width = SizeConfig.blockSizeHorizontal;
-    var radius = Radius.circular(20);
+    var radius = const Radius.circular(20);
     return SafeArea(
       child: SingleChildScrollView(
         child: Column(children: [
-          HomeTop(image: AssetImage("assets/images/image.webp")),
-          SizedBox(height: 15),
+          const HomeTop(image: AssetImage("assets/images/image.webp")),
+          const SizedBox(height: 15),
           Padding(
             padding: EdgeInsets.symmetric(
                 horizontal: SizeConfig.blockSizeHorizontal * 8.0),
@@ -31,12 +60,15 @@ class _BodyState extends State<Body> {
                   hintText: "search",
                   border: OutlineInputBorder(
                       borderRadius: BorderRadius.circular(15),
-                      borderSide: BorderSide(color: Colors.black)),
+                      borderSide: const BorderSide(color: Colors.black)),
                   focusedBorder: OutlineInputBorder(
                       borderRadius: BorderRadius.circular(15),
-                      borderSide: BorderSide(width: 1.5)),
-                  prefixIcon: Icon(Icons.search),
-                  suffixIcon: Icon(Icons.my_location)),
+                      borderSide: const BorderSide(width: 1.5)),
+                  prefixIcon: const Icon(Icons.search),
+                  suffixIcon: IconButton(
+                    icon: const Icon(Icons.my_location),
+                    onPressed: () {},
+                  )),
             ),
           ),
           SizedBox(
@@ -47,20 +79,18 @@ class _BodyState extends State<Body> {
             press: () {},
             text: 'Recommended For you',
           ),
-          SizedBox(height: 10),
-          ItemCard(radius: radius, height: height, width: width, index: 1,),
-          CarouselSlider(
-            options: CarouselOptions(autoPlayCurve: Curves.bounceInOut,
-            enlargeCenterPage: true,
-                enlargeStrategy: CenterPageEnlargeStrategy.height),
-            items: [1,2,3,4,5].map((i) {
-              return Builder(
-                builder: (BuildContext context) {
-                  return ItemCard(radius: radius, height: height, width: width, index: i);
-                },
-              );
-            }).toList(),
-          )
+          const SizedBox(height: 15),
+          //ItemCard(radius: radius, height: height, width: width, index: 1,),
+          GalleryCarousel(
+              testList: testList, radius: radius, height: height, width: width),
+          const SizedBox(height: 15),
+          SectionTitle(width: width, text: "Villes", press: () {}),
+          const SizedBox(height: 15),
+          CityGallery(width: width, height: height, testList: testCities,),
+          const SizedBox(height: 15),
+          SectionTitle(width: width, text: "Categorie", press: () {}),
+          const SizedBox(height: 15),
+          CityGallery(width: width, height: height, testList: testCities,)
           //HomeTop(image: AssetImage("assets/images/image.webp"))
         ]),
       ),

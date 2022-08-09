@@ -23,8 +23,8 @@ class HomeTop extends StatelessWidget {
                 )
               ),
             ),
-            Center(
-              child: const Text(
+            const Center(
+              child: Text(
                 "Découvrez les restaurants au Maroc",
                 style: TextStyle(
                   color: Colors.white,
