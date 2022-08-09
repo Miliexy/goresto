@@ -1,6 +1,6 @@
-import 'dart:io';
 
 import 'package:flutter/material.dart';
+import 'package:goresto/Screens/Restaurant/restaurant_screen.dart';
 import 'package:goresto/routes.dart';
 import 'package:url_launcher/url_launcher_string.dart';
 
@@ -24,7 +24,7 @@ class ItemCard extends StatelessWidget {
   Widget build(BuildContext context) {
     return LayoutBuilder(
         builder: (context, constraints) => GestureDetector(
-              onTap: () => Navigator.of(context).push(createRoute()),
+              onTap: () => Navigator.of(context).push(createRoute(RestaurantScreen.routeName)),
               child: Container(
                 clipBehavior: Clip.hardEdge,
                 width: constraints.maxWidth * 0.9,
@@ -37,31 +37,33 @@ class ItemCard extends StatelessWidget {
                           color: Colors.grey.withOpacity(0.5),
                           spreadRadius: 3,
                           blurRadius: 5,
-                          offset: Offset(0.5, 0))
+                          offset: const Offset(0.5, 0))
                     ]),
                 child: Stack(
                   children: [
                     Column(
                       children: [
                         Expanded(
+                          flex: 3,
                           child: Container(
                             decoration: BoxDecoration(
                                 image: DecorationImage(
                                     image: AssetImage(info["image"].toString()),
                                     fit: BoxFit.cover)),
                           ),
-                          flex: 3,
                         ),
                         Expanded(
+                          flex: 2,
                           child: Container(
                             color: Colors.grey,
                           ),
-                          flex: 2,
                         )
                       ],
                     ),
                     if (constraints.maxHeight < 300.0)
                       Positioned(
+                        left: constraints.biggest.width * 0.08,
+                        top: constraints.biggest.height * 0.52,
                         child: Column(
                           crossAxisAlignment: CrossAxisAlignment.start,
                           children: [
@@ -73,7 +75,7 @@ class ItemCard extends StatelessWidget {
                             SizedBox(
                               height: constraints.maxHeight * 0.03,
                             ),
-                            Text(
+                            const Text(
                               "Restaurant",
                               style: TextStyle(
                                   color: Colors.black,
@@ -83,41 +85,43 @@ class ItemCard extends StatelessWidget {
                             SizedBox(
                               height: constraints.maxHeight * 0.03,
                             ),
-                            Text("descirption")
+                            const Text("descirption")
                           ],
                         ),
-                        left: constraints.biggest.width * 0.08,
-                        top: constraints.biggest.height * 0.52,
                       ),
                     Positioned(
+                      left: constraints.biggest.width * 0.55,
+                      top: constraints.biggest.height * 0.65,
                       child: Row(
                         mainAxisAlignment: MainAxisAlignment.spaceBetween,
                         children: [
                           IconButton(
-                            icon: Icon(Icons.whatsapp),
+                            icon: const Icon(Icons.whatsapp),
                             onPressed: () async {
-                              var whatsapp = "+919144040888";
-                              var whatsappURl_android =
-                                  "whatsapp://send?phone=" +
-                                      whatsapp +
-                                      "&text=hello";
-                              var whatappURL_ios =
+
+                              var whatsapp = "212663845706";
+                              var whatsappURlAndroid ="whatsapp://send?phone=$whatsapp?text=${Uri.parse("hello")}";
                                   "https://wa.me/$whatsapp?text=${Uri.parse("hello")}";
+                                  var uri = Uri.parse('whatsapp://send?phone=$whatsapp&text=${Uri.parse("hello")}');
 
                               // android , web
-                              if (await canLaunchUrlString(
-                                  whatsappURl_android)) {
-                                await launchUrlString(whatsappURl_android);
+                              if (await canLaunchUrlString(whatsappURlAndroid)) {
+                                await launchUrlString(whatsappURlAndroid);
                               } else {
                                 ScaffoldMessenger.of(context).showSnackBar(
-                                     SnackBar(
-                                      duration: Duration(seconds: 2, milliseconds: 500),
-                                        shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(15)),
+                                    SnackBar(
+                                        duration: const Duration(
+                                            seconds: 2, milliseconds: 500),
+                                        shape: RoundedRectangleBorder(
+                                            borderRadius:
+                                                BorderRadius.circular(15)),
                                         width: width * 80,
                                         behavior: SnackBarBehavior.floating,
                                         backgroundColor: Colors.white,
-                                        content:
-                                            Text("Whatsapp is not installed", style: TextStyle(color: Colors.black),)));
+                                        content: const Text(
+                                          "Whatsapp is not installed",
+                                          style: TextStyle(color: Colors.black),
+                                        )));
                               }
                             },
                             iconSize: 30,
@@ -126,17 +130,17 @@ class ItemCard extends StatelessWidget {
                             width: width * 3,
                           ),
                           IconButton(
-                            icon: Icon(Icons.location_on_outlined),
+                            icon: const Icon(Icons.location_on_outlined),
                             onPressed: () {},
                             iconSize: 30,
                           )
                         ],
                       ),
-                      left: constraints.biggest.width * 0.55,
-                      top: constraints.biggest.height * 0.65,
                     ),
                     if (constraints.maxHeight > 300.0)
                       Positioned(
+                        left: constraints.biggest.width * 0.08,
+                        top: constraints.biggest.height * 0.56,
                         child: Column(
                           crossAxisAlignment: CrossAxisAlignment.start,
                           children: [
@@ -149,7 +153,7 @@ class ItemCard extends StatelessWidget {
                               height: constraints.maxHeight * 0.03,
                             ),
                             Row(
-                              children: [
+                              children: const [
                                 Text(
                                   "Restaurant's name",
                                   style: TextStyle(
@@ -159,8 +163,6 @@ class ItemCard extends StatelessWidget {
                             )
                           ],
                         ),
-                        left: constraints.biggest.width * 0.08,
-                        top: constraints.biggest.height * 0.56,
                       ) //Wide,Tablet screens
                   ],
                 ),

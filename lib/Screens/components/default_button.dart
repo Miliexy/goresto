@@ -23,7 +23,7 @@ class DefaultButton extends StatelessWidget {
         style: ButtonStyle(
             backgroundColor:
             MaterialStateProperty.all(kPrimaryColor),
-            shape: MaterialStateProperty.all<CircleBorder>(CircleBorder(
+            shape: MaterialStateProperty.all<CircleBorder>(const CircleBorder(
             ))),
         child: icon,
       ),

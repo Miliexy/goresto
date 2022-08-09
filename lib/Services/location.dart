@@ -28,7 +28,6 @@ class GetLocation {
   Future<List<Placemark>> _decodingLocation(Position position) async {
     return await placemarkFromCoordinates(position.latitude, position.longitude);
   }
-
 }
 
 class CurrentLocation extends StatefulWidget {
@@ -85,10 +84,10 @@ class _CurrentLocationState extends State<CurrentLocation>  {
         child: Column(
           children: [
             ElevatedButton(
-              child: Icon(Icons.add_location),
               onPressed: _getCurrentLocation,
+              child: const Icon(Icons.add_location),
             ),
-            _placeMarks != null ? Text(_placeMarks![0].street.toString(), style: TextStyle(fontSize: 10),) : Text("No location data")
+            _placeMarks != null ? Text(_placeMarks![0].street.toString(), style: const TextStyle(fontSize: 10),) : const Text("No location data")
           ],
         ),
       ),
