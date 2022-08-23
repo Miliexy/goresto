@@ -13,6 +13,7 @@ class RestaurantScreen extends StatelessWidget {
     return const Scaffold(
       resizeToAvoidBottomInset: false,
       body: Body(),
+
     );
   }
 }

@@ -16,29 +16,29 @@ class _BodyState extends State<Body> {
     {
       "name": "Something",
       "description": "a something restaurant",
-      "image": "assets/images/image.webp"
+      "image": "assets/images/fine-dining2.jpg"
     },
     {
       "name": "Another",
       "description": "a Another restaurant",
-      "image": "assets/images/placeholder.png"
+      "image": "assets/images/fine-dining1.jpg"
     }
   ];
   List<Map<String, String>> testCities = [
     {
       "name": "Casablanca",
       "count": "3 restaurants",
-      "image": "assets/images/image.webp"
+      "image": "assets/images/fine-dining2.jpg"
     },
     {
       "name": "Tangier",
       "count": "2 restaurants",
-      "image": "assets/images/image.webp"
+      "image": "assets/images/fine-dining3.jpg"
     },
     {
       "name": "Marrakech",
       "count": "2 restaurants",
-      "image": "assets/images/image.webp"
+      "image": "assets/images/fine-dining4.jpg"
     }
   ];
 
@@ -50,7 +50,7 @@ class _BodyState extends State<Body> {
     return SafeArea(
       child: SingleChildScrollView(
         child: Column(children: [
-          const HomeTop(image: AssetImage("assets/images/image.webp")),
+          const HomeTop(image: AssetImage("assets/images/fine-dining4.jpg")),
           const SizedBox(height: 15),
           Padding(
             padding: EdgeInsets.symmetric(
@@ -86,11 +86,11 @@ class _BodyState extends State<Body> {
           const SizedBox(height: 15),
           SectionTitle(width: width, text: "Villes", press: () {}),
           const SizedBox(height: 15),
-          CityGallery(width: width, height: height, testList: testCities,),
+          //CityGallery(width: width, height: height, testList: testCities,),
           const SizedBox(height: 15),
           SectionTitle(width: width, text: "Categorie", press: () {}),
           const SizedBox(height: 15),
-          CityGallery(width: width, height: height, testList: testCities,)
+          //CityGallery(width: width, height: height, testList: testCities,)
           //HomeTop(image: AssetImage("assets/images/image.webp"))
         ]),
       ),

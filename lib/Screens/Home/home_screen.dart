@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:goresto/Screens/Home/components/body.dart';
+import 'package:goresto/Screens/Home/components/homeTest.dart';
 import 'package:goresto/size_config.dart';
 
 class HomeScreen extends StatelessWidget {
@@ -10,7 +11,7 @@ class HomeScreen extends StatelessWidget {
   Widget build(BuildContext context) {
     SizeConfig().init(context);
     return Scaffold(
-      body: const Body(),
+      body: const HomeTest(),
       bottomNavigationBar: BottomNavigationBar(
         items: const [
           BottomNavigationBarItem(icon: Icon(Icons.home), label: "home"),
