@@ -5,6 +5,7 @@ import 'package:geocoding/geocoding.dart';
 class GetLocation {
   Position? _position;
   List<Placemark>? _placeMarks;
+  LocationPermission? _permission;
 
   Future<List<Placemark>> getCurrentLocation() async {
     Position position = await _determinePosition();
@@ -12,17 +13,25 @@ class GetLocation {
     return placeMarks;
   }
 
-  Future<Position> _determinePosition() async {
-    LocationPermission permission;
+  Future<List<Location>> getCoordinates(String address) async {
+    List<Location> locations = await locationFromAddress("Gronausestraat 710, Enschede");
+    return locations;
+  }
 
-    permission = await Geolocator.checkPermission();
+  Future<LocationPermission> fetchPermissions() async{
 
-    if(permission == LocationPermission.denied) {
-      permission = await Geolocator.requestPermission();
-      if(permission == LocationPermission.denied) {
-        return Future.error('Location Permissions are denied');
+    _permission = await Geolocator.checkPermission();
+
+    if(_permission == LocationPermission.denied) {
+      _permission = await Geolocator.requestPermission();
+      if(_permission == LocationPermission.deniedForever) {
+        return Future.error("Permissions to access location data were denied forever, please change that in the settings");
       }
     }
+    return  _permission! ;
+  }
+  Future<Position> _determinePosition() async {
+    if(_permission == LocationPermission.denied) return Future.error('Please enable location permissions');
     return await Geolocator.getCurrentPosition();
   }
   Future<List<Placemark>> _decodingLocation(Position position) async {
