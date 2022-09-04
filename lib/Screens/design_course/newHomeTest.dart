@@ -1,11 +1,5 @@
 
 import 'package:flutter/material.dart';
-import 'package:goresto/Screens/search/hotel_home_screen.dart';
-import 'package:sliver_tools/sliver_tools.dart';
-
-import '../../size_config.dart';
-import 'components/AppBar.dart';
-import 'homePage.dart';
 
 class MyHomePage extends StatefulWidget {
   const MyHomePage({Key? key}) : super(key: key);
@@ -15,12 +9,13 @@ class MyHomePage extends StatefulWidget {
 }
 
 class _MyHomePageState extends State<MyHomePage> {
-  late final ScrollController _scrollController = ScrollController();
+  //late final ScrollController _scrollController = ScrollController();
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      body:NestedScrollView(controller: _scrollController,
+      body:Container(color: Colors.red,)
+      /*NestedScrollView(controller: _scrollController,
         headerSliverBuilder: (context, innerBoxIsScrolled) {
           return [
             SliverStack(
@@ -69,7 +64,7 @@ class _MyHomePageState extends State<MyHomePage> {
         },
           itemCount: 50,
         ),
-      )
+      )*/
     );
   }
 }
