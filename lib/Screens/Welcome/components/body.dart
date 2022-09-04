@@ -1,12 +1,8 @@
 import 'package:flutter/material.dart';
-import 'package:auth_buttons/auth_buttons.dart';
-import 'package:geocoding/geocoding.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:goresto/Screens/Locations/location_screen.dart';
-import 'package:goresto/Screens/components/animatedDialog.dart';
 import 'package:goresto/Screens/components/default_button.dart';
 import 'package:goresto/Services/location.dart';
-import 'package:goresto/constansts.dart';
 import 'package:goresto/routes.dart';
 import 'package:goresto/size_config.dart';
 
@@ -21,8 +17,8 @@ class Body extends StatefulWidget {
 
 class _BodyState extends State<Body> {
   final GetLocation getLocation = GetLocation();
-  List<Placemark>? _placemark;
   int currentPage = 0;
+  String testText = "consequat interdum varius sit amet mattis vulputate enim nulla";
   List<Map<String, String>> welcomeData = [
     {
       "text": 'Découvrez les restaurants au Maroc',
@@ -32,7 +28,7 @@ class _BodyState extends State<Body> {
       "text": "Trouver le meilleur restaurant où manger au Maroc",
       "image": "assets/images/fine-dining3.jpg"
     },
-    {"text": "hello world 3", "image": "assets/images/fine-dining1.jpg"},
+    {"text": "consequat interdum varius sit amet mattis vulputate enim nulla aliquet porttitor", "image": "assets/images/fine-dining1.jpg"},
   ];
 
   late final PageController _pageController = PageController(initialPage: 0);
@@ -43,9 +39,10 @@ class _BodyState extends State<Body> {
     return SafeArea(
       child: Column(
         children: <Widget>[
-          Expanded(
-            flex: 4,
+          SizedBox(
+            height: SizeConfig.blockSizeVertical * 80,
             child: PageView.builder(
+
               controller: _pageController,
               onPageChanged: (value) {
                 setState(() {
@@ -56,24 +53,21 @@ class _BodyState extends State<Body> {
               itemBuilder: (context, index) => WelcomeContent(
                 image: welcomeData[index]["image"].toString(),
                 text: welcomeData[index]["text"].toString(),
+                testText: testText
               ),
             ),
           ),
-          Expanded(
-            flex: 2,
+
+          SizedBox(
             child: Padding(
               padding: EdgeInsets.symmetric(
-                  horizontal: getProportionateScreenWidth(20)),
+                  horizontal: SizeConfig.blockSizeHorizontal * 1),
               child: Row(
                 children: <Widget>[
                   Expanded(
                     child: TextButton(
                         onPressed: () {
-                          showDialog(
-                              context: context,
-                              builder: (context) {
-                                return AnimatedDialog();
-                              });
+                          Navigator.of(context).pushAndRemoveUntil(createRoute(GeoLocationScreen.routeName), (route) => false);
                         },
                         style: ButtonStyle(
                             tapTargetSize: MaterialTapTargetSize.shrinkWrap,
@@ -83,10 +77,9 @@ class _BodyState extends State<Body> {
                                 const CircleBorder()),
                             backgroundColor: MaterialStateProperty.all(
                                 Colors.grey.withOpacity(0.05))),
-                        child: const Text(
+                        child: Text(
                           'Skip',
-                          style:
-                              TextStyle(color: Colors.black, fontSize: 25),
+                          style: GoogleFonts.montserratAlternates(color: Colors.black, fontSize: 25, fontWeight: FontWeight.w400),
                           textAlign: TextAlign.center,
                         )),
                   ),

@@ -1,8 +1,8 @@
 
 import 'package:flutter/material.dart';
+import 'package:google_fonts/google_fonts.dart';
 import 'package:goresto/Screens/Restaurant/restaurant_screen.dart';
 import 'package:goresto/routes.dart';
-import 'package:url_launcher/url_launcher_string.dart';
 
 class ItemCard extends StatelessWidget {
   const ItemCard({
@@ -54,8 +54,10 @@ class ItemCard extends StatelessWidget {
                         ),
                         Expanded(
                           flex: 2,
+
                           child: Container(
-                            color: Colors.grey,
+                            color: Color(0xae1c1b1b),
+
                           ),
                         )
                       ],
@@ -78,14 +80,14 @@ class ItemCard extends StatelessWidget {
                             const Text(
                               "Restaurant",
                               style: TextStyle(
-                                  color: Colors.black,
+                                  color: Colors.white,
                                   fontSize: 15,
                                   fontWeight: FontWeight.w600),
                             ),
                             SizedBox(
                               height: constraints.maxHeight * 0.03,
                             ),
-                            const Text("descirption")
+                            Text("descirption", style: GoogleFonts.montserratAlternates(color: Colors.white),)
                           ],
                         ),
                       ),
@@ -96,33 +98,8 @@ class ItemCard extends StatelessWidget {
                         mainAxisAlignment: MainAxisAlignment.spaceBetween,
                         children: [
                           IconButton(
-                            icon: const Icon(Icons.whatsapp),
-                            onPressed: () async {
-
-                              var whatsapp = "212663845706";
-                              var whatsappURlAndroid ="whatsapp://send?phone=$whatsapp?text=${Uri.parse("hello")}";
-                                  "https://wa.me/$whatsapp?text=${Uri.parse("hello")}";
-                                  var uri = Uri.parse('whatsapp://send?phone=$whatsapp&text=${Uri.parse("hello")}');
-
-                              // android , web
-                              if (await canLaunchUrlString(whatsappURlAndroid)) {
-                                await launchUrlString(whatsappURlAndroid);
-                              } else {
-                                ScaffoldMessenger.of(context).showSnackBar(
-                                    SnackBar(
-                                        duration: const Duration(
-                                            seconds: 2, milliseconds: 500),
-                                        shape: RoundedRectangleBorder(
-                                            borderRadius:
-                                                BorderRadius.circular(15)),
-                                        width: width * 80,
-                                        behavior: SnackBarBehavior.floating,
-                                        backgroundColor: Colors.white,
-                                        content: const Text(
-                                          "Whatsapp is not installed",
-                                          style: TextStyle(color: Colors.black),
-                                        )));
-                              }
+                            icon: const Icon(Icons.whatsapp, color: Colors.white,),
+                            onPressed: ()  {
                             },
                             iconSize: 30,
                           ),
@@ -130,7 +107,7 @@ class ItemCard extends StatelessWidget {
                             width: width * 3,
                           ),
                           IconButton(
-                            icon: const Icon(Icons.location_on_outlined),
+                            icon: const Icon(Icons.location_on_outlined, color: Colors.white,),
                             onPressed: () {},
                             iconSize: 30,
                           )
@@ -157,7 +134,7 @@ class ItemCard extends StatelessWidget {
                                 Text(
                                   "Restaurant's name",
                                   style: TextStyle(
-                                      color: Colors.black, fontSize: 25),
+                                      color: Colors.white, fontSize: 25),
                                 ),
                               ],
                             )
