@@ -5,11 +5,11 @@ name: CI
 on:
   # Triggers the workflow on push or pull request events but only for the main branch
   push:
-    branches: [goresto-cd, newbranch]
+    branches: [newbranch]
     paths-ignore:
       - '**/README.md'
   pull_request:
-    branches: [goresto-cd, newbranch]
+    branches: [newbranch]
 
   # Allows you to run this workflow manually from the Actions tab
   workflow_dispatch:
