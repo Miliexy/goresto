@@ -21,9 +21,10 @@ class NewHomeScreenState extends State<NewHomeScreen> {
 
   var currentIndex = 0;
   late final List<Widget> _children = [
+
     HomePage(callBack: callBack),
-    HotelHomeScreen(),
-    MyHomePage()
+    const SearchScreen(),
+    const MyHomePage()
   ];
   void callBack()
   {
