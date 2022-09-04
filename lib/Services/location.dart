@@ -1,3 +1,5 @@
+import 'dart:ffi';
+
 import 'package:flutter/material.dart';
 import 'package:geolocator/geolocator.dart';
 import 'package:geocoding/geocoding.dart';
@@ -9,7 +11,7 @@ class GetLocation {
 
   Future<List<Placemark>> getCurrentLocation() async {
     Position position = await _determinePosition();
-    List<Placemark> placeMarks = await  _decodingLocation(position);
+    List<Placemark> placeMarks = await  _decodingLocationFromPosition(position);
     return placeMarks;
   }
 
@@ -34,8 +36,11 @@ class GetLocation {
     if(_permission == LocationPermission.denied) return Future.error('Please enable location permissions');
     return await Geolocator.getCurrentPosition();
   }
-  Future<List<Placemark>> _decodingLocation(Position position) async {
+  Future<List<Placemark>> _decodingLocationFromPosition(Position position) async {
     return await placemarkFromCoordinates(position.latitude, position.longitude);
+  }
+  Future<List<Placemark>> decodingLocationFromLatLng(double latitude, double longitude) async {
+    return await placemarkFromCoordinates(latitude, longitude, localeIdentifier: 'fr_MA');
   }
 }
 

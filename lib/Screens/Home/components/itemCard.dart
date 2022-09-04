@@ -3,7 +3,6 @@ import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:goresto/Screens/Restaurant/restaurant_screen.dart';
 import 'package:goresto/routes.dart';
-import 'package:url_launcher/url_launcher_string.dart';
 
 class ItemCard extends StatelessWidget {
   const ItemCard({
@@ -100,32 +99,7 @@ class ItemCard extends StatelessWidget {
                         children: [
                           IconButton(
                             icon: const Icon(Icons.whatsapp, color: Colors.white,),
-                            onPressed: () async {
-
-                              var whatsapp = "212663845706";
-                              var whatsappURlAndroid ="whatsapp://send?phone=$whatsapp?text=${Uri.parse("hello")}";
-                                  "https://wa.me/$whatsapp?text=${Uri.parse("hello")}";
-                                  var uri = Uri.parse('whatsapp://send?phone=$whatsapp&text=${Uri.parse("hello")}');
-
-                              // android , web
-                              if (await canLaunchUrlString(whatsappURlAndroid)) {
-                                await launchUrlString(whatsappURlAndroid);
-                              } else {
-                                ScaffoldMessenger.of(context).showSnackBar(
-                                    SnackBar(
-                                        duration: const Duration(
-                                            seconds: 2, milliseconds: 500),
-                                        shape: RoundedRectangleBorder(
-                                            borderRadius:
-                                                BorderRadius.circular(15)),
-                                        width: width * 80,
-                                        behavior: SnackBarBehavior.floating,
-                                        backgroundColor: Colors.white,
-                                        content: const Text(
-                                          "Whatsapp is not installed",
-                                          style: TextStyle(color: Colors.black),
-                                        )));
-                              }
+                            onPressed: ()  {
                             },
                             iconSize: 30,
                           ),

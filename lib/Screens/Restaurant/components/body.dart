@@ -6,7 +6,9 @@ import 'package:flutter/material.dart';
 import 'package:flutter_staggered_grid_view/flutter_staggered_grid_view.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:google_maps_flutter/google_maps_flutter.dart';
+import 'package:goresto/Screens/components/commentSection.dart';
 import 'package:goresto/Screens/components/roundedIcnBtn.dart';
+import 'package:goresto/routes.dart';
 import 'package:goresto/size_config.dart';
 
 class Body extends StatefulWidget {
@@ -70,28 +72,29 @@ class _BodyState extends State<Body> with TickerProviderStateMixin {
           SliverAppBar(
             snap: false,
             pinned: true,
+            floating: false,
             flexibleSpace: FlexibleSpaceBar(
               background: Container(
                 clipBehavior: Clip.hardEdge,
                 decoration: BoxDecoration(
-                    color: Colors.white,
-                    boxShadow: const [
-                      BoxShadow(
-                        color: Colors.grey,
-                        offset: Offset(0.0, 1.0), //(x,y)
-                        blurRadius: 6.0,
-                      ),
-                    ],
+                  color: Colors.white,
+                  boxShadow: const [
+                    BoxShadow(
+                      color: Colors.grey,
+                      offset: Offset(0.0, 1.0), //(x,y)
+                      blurRadius: 6.0,
                     ),
+                  ],
+                ),
                 child: Stack(
                   children: [
                     CarouselSlider(
                         carouselController: _controller,
                         items: testCities
                             .map((e) => Image.network(
-                          "https://youstickout.ma/rest/wp-content/uploads/2018/12/265833405_3164046847202905_8407767184837281245_n.jpg",
-                          fit: BoxFit.cover,
-                        ))
+                                  "https://youstickout.ma/rest/wp-content/uploads/2018/12/265833405_3164046847202905_8407767184837281245_n.jpg",
+                                  fit: BoxFit.cover,
+                                ))
                             .toList(),
                         options: CarouselOptions(
                             viewportFraction: 1.0,
@@ -123,27 +126,30 @@ class _BodyState extends State<Body> with TickerProviderStateMixin {
                                         children: [
                                           Column(
                                             crossAxisAlignment:
-                                            CrossAxisAlignment.start,
-                                            mainAxisAlignment: MainAxisAlignment.end,
+                                                CrossAxisAlignment.start,
+                                            mainAxisAlignment:
+                                                MainAxisAlignment.end,
                                             children: [
                                               Text(
                                                 "Name",
-                                                style:
-                                                GoogleFonts.montserratAlternates(
-                                                    fontWeight: FontWeight.w700,
-                                                    fontSize: 18),
+                                                style: GoogleFonts
+                                                    .montserratAlternates(
+                                                        fontWeight:
+                                                            FontWeight.w700,
+                                                        fontSize: 18),
                                               ),
                                               const SizedBox(
                                                 height: 5.0,
                                               ),
                                               Text(
                                                 "Description",
-                                                style:
-                                                GoogleFonts.montserratAlternates(
-                                                    fontWeight: FontWeight.w500,
-                                                    fontSize: 13,
-                                                    color:
-                                                    const Color(0xe8727171)),
+                                                style: GoogleFonts
+                                                    .montserratAlternates(
+                                                        fontWeight:
+                                                            FontWeight.w500,
+                                                        fontSize: 13,
+                                                        color: const Color(
+                                                            0xe8727171)),
                                               ),
                                             ],
                                           ),
@@ -162,11 +168,12 @@ class _BodyState extends State<Body> with TickerProviderStateMixin {
                       alignment: Alignment(-0.888, 0.5),
                       child: CircleAvatar(
                         radius: 35,
-                        foregroundImage: AssetImage("assets/images/avatar_test.png"),
+                        foregroundImage:
+                            AssetImage("assets/images/avatar_test.png"),
                       ),
                     ),
                     Align(
-                      alignment: Alignment(0,0.3) ,
+                      alignment: Alignment(0, 0.3),
                       child: Row(
                         mainAxisAlignment: MainAxisAlignment.center,
                         children: testCities.asMap().entries.map((entry) {
@@ -181,11 +188,11 @@ class _BodyState extends State<Body> with TickerProviderStateMixin {
                               decoration: BoxDecoration(
                                   borderRadius: BorderRadius.circular(35),
                                   color: (Theme.of(context).brightness ==
-                                      Brightness.dark
-                                      ? Colors.white
-                                      : Colors.black)
+                                              Brightness.dark
+                                          ? Colors.white
+                                          : Colors.black)
                                       .withOpacity(
-                                      _current == entry.key ? 0.9 : 0.4)),
+                                          _current == entry.key ? 0.9 : 0.4)),
                             ),
                           );
                         }).toList(),
@@ -193,7 +200,7 @@ class _BodyState extends State<Body> with TickerProviderStateMixin {
                     )
                   ],
                 ),
-                ),
+              ),
               centerTitle: true,
               collapseMode: CollapseMode.pin,
               //background: Container(color: Colors.white,),
@@ -325,36 +332,59 @@ class _BodyState extends State<Body> with TickerProviderStateMixin {
                         height: SizeConfig.blockSizeVertical * 2,
                       ),
                       _buildCategories(),
-                      SizedBox(),
+                      SizedBox(
+                        height: SizeConfig.blockSizeVertical * 2,
+                      ),
                       _buildSocialMedia(),
+                      SizedBox(
+                        height: SizeConfig.blockSizeVertical * 2,
+                      ),
                     ],
                   ),
                 ),
-                Container(
-                  child: ListView.builder(
-                    //store Page state
-                    key: const PageStorageKey<String>('Tab1'),
-                    physics: const ClampingScrollPhysics(),
-                    itemBuilder: (BuildContext c, int i) {
-                      return Container(
-                        alignment: Alignment.center,
-                        height: 60.0,
-                        child: Text('${const Key('Tab1')}: ListView$i'),
-                      );
-                    },
-                    itemCount: 50,
-                  ),
-                ),
+                CommentSection(testText: testText),
                 Container(
                     child: AlignedGridView.custom(
+                  shrinkWrap: true,
+                  mainAxisSpacing: 3,
+                  crossAxisSpacing: 5,
+                  padding: EdgeInsets.symmetric(
+                      horizontal: SizeConfig.blockSizeHorizontal * 3),
                   gridDelegate: SliverSimpleGridDelegateWithFixedCrossAxisCount(
                       crossAxisCount: 2),
                   itemBuilder: (context, index) => Container(
-                    width: 25,
-                    height: 30,
-                    color: Colors.red,
+                    child: GestureDetector(
+                      behavior: HitTestBehavior.opaque,
+                      onTap: () {
+                        Navigator.of(context).push(createRoute("/item"));
+                      },
+                      onLongPress: () {
+                      },
+                      child: Hero(
+                        transitionOnUserGestures: true,
+                        tag: 'containerHero-${index}',
+                        child: Column(
+                          children: [
+                            Image.asset("assets/images/fine-dining1.jpg"),
+                            Text("Item Name"),
+                            Row(
+                              children: [
+                                Text(
+                                  "12.55",
+                                  style: TextStyle(
+                                      decoration: TextDecoration.lineThrough),
+                                ),
+                                Text("10.55"),
+                              ],
+                            ),
+                            ElevatedButton(
+                                onPressed: () {}, child: Text("Add to cart"))
+                          ],
+                        ),
+                      ),
+                    ),
                   ),
-                      itemCount: 5,
+                  itemCount: 5,
                 )),
               ],
             ),
@@ -365,6 +395,7 @@ class _BodyState extends State<Body> with TickerProviderStateMixin {
   }
 
   _buildCategories() => Card(
+        shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(15)),
         margin: EdgeInsets.symmetric(horizontal: 12),
         elevation: 13,
         clipBehavior: Clip.antiAlias,
@@ -401,6 +432,7 @@ class _BodyState extends State<Body> with TickerProviderStateMixin {
         ),
       );
   _buildTags() => Card(
+        shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(15)),
         margin: EdgeInsets.symmetric(horizontal: 12),
         elevation: 13,
         clipBehavior: Clip.antiAlias,
@@ -439,6 +471,7 @@ class _BodyState extends State<Body> with TickerProviderStateMixin {
       );
 
   _buildSocialMedia() => Card(
+        shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(15)),
         margin: EdgeInsets.symmetric(horizontal: 12),
         elevation: 13,
         clipBehavior: Clip.antiAlias,
@@ -481,7 +514,9 @@ class _BodyState extends State<Body> with TickerProviderStateMixin {
           ],
         ),
       );
+
   _buildTabContext() => Card(
+        shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(15)),
         margin: EdgeInsets.symmetric(horizontal: 12),
         elevation: 13,
         clipBehavior: Clip.antiAlias,
@@ -502,6 +537,7 @@ class _BodyState extends State<Body> with TickerProviderStateMixin {
         ),
       );
   _buildMap() => Card(
+        shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(15)),
         margin: EdgeInsets.symmetric(horizontal: 12),
         elevation: 13,
         clipBehavior: Clip.antiAlias,
