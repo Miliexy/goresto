@@ -12,14 +12,14 @@ import 'package:sliver_tools/sliver_tools.dart';
 import 'filters_screen.dart';
 import 'hotel_app_theme.dart';
 
-class HotelHomeScreen extends StatefulWidget {
-  const HotelHomeScreen({Key? key}) : super(key: key);
+class SearchScreen extends StatefulWidget {
+  const SearchScreen({Key? key}) : super(key: key);
 
   @override
-  HotelHomeScreenState createState() => HotelHomeScreenState();
+  SearchScreenState createState() => SearchScreenState();
 }
 
-class HotelHomeScreenState extends State<HotelHomeScreen>
+class SearchScreenState extends State<SearchScreen>
     with TickerProviderStateMixin {
   AnimationController? animationController;
   AnimationController? _animationController;
