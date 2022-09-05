@@ -11,7 +11,7 @@ import 'package:goresto/size_config.dart';
 import 'package:intl/intl.dart';
 import 'package:sliver_tools/sliver_tools.dart';
 
-import 'hotel_app_theme.dart';
+import 'package:goresto/Screens/Search/hotel_app_theme.dart';
 
 class SearchScreen2 extends StatefulWidget {
   const SearchScreen2({Key? key}) : super(key: key);

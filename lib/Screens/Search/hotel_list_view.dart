@@ -1,11 +1,9 @@
 import 'package:geocoding/geocoding.dart';
-import 'package:goresto/Screens/search/hotel_app_theme.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_rating_bar/flutter_rating_bar.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
-import 'package:goresto/Services/location.dart';
+import 'package:goresto/Screens/Search/hotel_app_theme.dart';
 
-import 'model/hotel_list_data.dart';
 
 class RestaurantListView extends StatelessWidget {
   RestaurantListView(

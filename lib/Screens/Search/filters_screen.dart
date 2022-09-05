@@ -3,7 +3,7 @@ import 'package:flutter/material.dart';
 import 'package:goresto/Screens/testData/dataList.dart';
 import 'range_slider_view.dart';
 import 'slider_view.dart';
-import 'hotel_app_theme.dart';
+import 'package:goresto/Screens/Search/hotel_app_theme.dart';
 import 'model/popular_filter_list.dart';
 
 class FiltersScreen extends StatefulWidget {

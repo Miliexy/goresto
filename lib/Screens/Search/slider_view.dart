@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 
-import 'hotel_app_theme.dart';
+import 'package:goresto/Screens/Search/hotel_app_theme.dart';
 
 class SliderView extends StatefulWidget {
   const SliderView({Key? key, this.onChangedistValue, this.distValue})
