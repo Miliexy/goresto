@@ -1,14 +1,16 @@
-import 'package:goresto/Screens/MapTest/map.dart';
-import 'package:goresto/Screens/search/calendar_popup_view.dart';
-import 'package:goresto/Screens/search/hotel_list_view.dart';
-import 'package:goresto/Screens/search/model/hotel_list_data.dart';
+
+
 import 'package:flutter/material.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
+import 'package:goresto/Screens/MapTest/map.dart';
+import 'package:goresto/Screens/Search/calendar_popup_view.dart';
+import 'package:goresto/Screens/Search/filters_screen.dart';
+import 'package:goresto/Screens/Search/hotel_list_view.dart';
 import 'package:goresto/Screens/testData/dataList.dart';
 import 'package:goresto/size_config.dart';
 import 'package:intl/intl.dart';
 import 'package:sliver_tools/sliver_tools.dart';
-import 'filters_screen.dart';
+
 import 'hotel_app_theme.dart';
 
 class SearchScreen2 extends StatefulWidget {
@@ -23,7 +25,6 @@ class SearchScreen2State extends State<SearchScreen2>
     with TickerProviderStateMixin {
   AnimationController? animationController;
   AnimationController? _animationController;
-  List<HotelListData> hotelList = HotelListData.hotelList;
   final ScrollController _scrollController = ScrollController();
   var buttonState = false ;
 
@@ -481,6 +482,7 @@ class SearchScreen2State extends State<SearchScreen2>
       ],
     );
   }
+
 
   void showDemoDialog({BuildContext? context}) {
     showDialog<dynamic>(
