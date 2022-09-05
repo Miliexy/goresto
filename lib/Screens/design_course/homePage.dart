@@ -1,7 +1,7 @@
+import 'package:goresto/Screens/Search/search_screen.dart';
 import 'package:goresto/Screens/design_course/newHomeTest.dart';
 import 'package:goresto/Screens/design_course/restaurant_info.dart';
 import 'package:flutter/material.dart';
-import 'package:goresto/Screens/search/search_screen.dart';
 import 'package:goresto/constansts.dart';
 import 'package:goresto/size_config.dart';
 import 'package:sliver_tools/sliver_tools.dart';
@@ -24,7 +24,7 @@ class NewHomeScreenState extends State<NewHomeScreen> {
   late final List<Widget> _children = [
 
     HomePage(callBack: callBack),
-    SearchScreen(),
+    SearchScreen2(),
     const MyHomePage()
   ];
   void callBack()
