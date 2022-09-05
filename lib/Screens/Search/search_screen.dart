@@ -18,6 +18,7 @@ class SearchScreen extends StatefulWidget {
   SearchScreenState createState() => SearchScreenState();
 }
 
+
 class SearchScreenState extends State<SearchScreen>
     with TickerProviderStateMixin {
   AnimationController? animationController;
