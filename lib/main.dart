@@ -15,6 +15,7 @@ void main(){
     mapsImplementation.useAndroidViewSurface = true;
   }
   WidgetsFlutterBinding.ensureInitialized();
+
   SystemChrome.setPreferredOrientations([
     DeviceOrientation.portraitUp,
     DeviceOrientation.portraitDown
@@ -38,8 +39,8 @@ class MyApp extends StatelessWidget{
         ),
         visualDensity: VisualDensity.adaptivePlatformDensity,
       ),
-      initialRoute: IntroductionAnimationScreen.routeName,
-      routes: routes,
+      initialRoute: AppRouter.onBoardingRoute,
+      onGenerateRoute: AppRouter.onGenerateRoute,
     );
   }
 

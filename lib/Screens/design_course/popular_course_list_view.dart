@@ -26,6 +26,12 @@ class _PopularCourseListViewState extends State<PopularCourseListView>
     await Future<dynamic>.delayed(const Duration(milliseconds: 200));
     return true;
   }
+  @override
+  void dispose() {
+    // TODO: implement dispose
+    animationController?.dispose();
+    super.dispose();
+  }
 
   @override
   Widget build(BuildContext context) {

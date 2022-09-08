@@ -141,7 +141,7 @@ class CenterNextButton extends StatelessWidget {
                 children: [
                   TextButton(
                     onPressed: () {
-                      Navigator.of(context).push(createRoute("/newHome"));
+                      Navigator.pushNamed(context, AppRouter.homeRoute);
                     },
                     child: Text("Not now",
                         style: TextStyle(

@@ -12,36 +12,24 @@ class TitleWidget extends StatelessWidget {
   Widget build(BuildContext context) {
     return Padding(
       padding: EdgeInsets.only(top: SizeConfig.blockSizeVertical * 4, left: SizeConfig.blockSizeHorizontal * 5),
-      child: Row(
+      child: Column(
+        mainAxisAlignment: MainAxisAlignment.spaceBetween,
+        crossAxisAlignment: CrossAxisAlignment.start,
         children: <Widget>[
-          Expanded(
-            child: Column(
-              mainAxisAlignment: MainAxisAlignment.end,
-              crossAxisAlignment: CrossAxisAlignment.start,
-              children: <Widget>[
-                Text(
-                  'Choose your',
-                  textAlign: TextAlign.left,
-                  style: TextStyle(
-                    fontWeight: FontWeight.w400,
-                    fontSize: fontTextSize,
-                    letterSpacing: 0.2,
-                    color: kPrimaryColor,
-                  ),
-                ),
-                Text(
-                  'Nos Restaurant',
-                  textAlign: TextAlign.left,
-                  style: TextStyle(
-                    fontWeight: FontWeight.bold,
-                    fontSize: fontTitleSize,
-                    letterSpacing: 0.27,
-                    color: kPrimaryColor,
-                  ),
-                ),
-              ],
+          Text(
+            'Logo',
+            textAlign: TextAlign.left,
+            style: TextStyle(
+              fontWeight: FontWeight.w400,
+              fontSize: 35,
+              letterSpacing: 0.2,
+              color: kPrimaryColor,
             ),
           ),
+          SizedBox(
+            height: SizeConfig.blockSizeHorizontal * 8,
+          ),
+
         ],
       ),
     );

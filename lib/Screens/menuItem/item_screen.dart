@@ -4,7 +4,7 @@ import 'package:goresto/Screens/components/commentSection.dart';
 import 'package:goresto/size_config.dart';
 
 class MenuProduct extends StatefulWidget {
-  const MenuProduct({Key? key}) : super(key: key);
+  const MenuProduct({Key? key, required List<dynamic> data}) : super(key: key);
   static String routeName ="/item";
 
   @override

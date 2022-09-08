@@ -110,7 +110,7 @@ class _CommentSectionState extends State<CommentSection> {
               ],
             ),
           ),
-          SizedBox(height: 30,),
+          SizedBox(height: SizeConfig.blockSizeVertical * 5,),
           Row(
             mainAxisAlignment: MainAxisAlignment.center,
             children: [
@@ -154,6 +154,7 @@ class _CommentSectionState extends State<CommentSection> {
             itemCount: testComment.length,
             shrinkWrap: true,
             physics: NeverScrollableScrollPhysics(),
+            padding: EdgeInsets.zero,
           )
         ],
       ),

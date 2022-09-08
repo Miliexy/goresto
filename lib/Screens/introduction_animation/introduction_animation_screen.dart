@@ -1,3 +1,4 @@
+import 'package:flutter/services.dart';
 import 'package:geolocator/geolocator.dart';
 import 'package:goresto/Screens/design_course/homePage.dart';
 import 'package:goresto/Screens/introduction_animation/components/booking_view.dart';
@@ -44,40 +45,39 @@ class IntroductionAnimationScreenState
 
   @override
   Widget build(BuildContext context) {
+    SystemChrome.setSystemUIOverlayStyle(SystemUiOverlayStyle.light);
+
     SizeConfig().init(context);
     return Scaffold(
       backgroundColor: kPrimaryColor,
-
-      body: SafeArea(
-        child: ClipRect(
-          child: Stack(
-            children: [
-              SplashView(
-                animationController: _animationController!,
-              ),
-              RelaxView(
-                animationController: _animationController!,
-              ),
-              BookingView(
-                animationController: _animationController!,
-              ),
-              MoodDiaryVew(
-                animationController: _animationController!,
-              ),
-              WelcomeView(
-                animationController: _animationController!,
-              ),
-              TopBackSkipView(
-                onBackClick: _onBackClick,
-                onSkipClick: _onSkipClick,
-                animationController: _animationController!,
-              ),
-              CenterNextButton(
-                animationController: _animationController!,
-                onNextClick: _onNextClick,
-              ),
-            ],
-          ),
+      body: ClipRect(
+        child: Stack(
+          children: [
+            SplashView(
+              animationController: _animationController!,
+            ),
+            RelaxView(
+              animationController: _animationController!,
+            ),
+            BookingView(
+              animationController: _animationController!,
+            ),
+            MoodDiaryVew(
+              animationController: _animationController!,
+            ),
+            WelcomeView(
+              animationController: _animationController!,
+            ),
+            TopBackSkipView(
+              onBackClick: _onBackClick,
+              onSkipClick: _onSkipClick,
+              animationController: _animationController!,
+            ),
+            CenterNextButton(
+              animationController: _animationController!,
+              onNextClick: _onNextClick,
+            ),
+          ],
         ),
       ),
     );
@@ -179,7 +179,7 @@ class IntroductionAnimationScreenState
               },
             ),
           ),);
-      })).then((value) => Navigator.of(context).pushAndRemoveUntil(createRoute(NewHomeScreen.routeName), (route) => true));
+      })).then((value) => Navigator.pushNamed(context, AppRouter.homeRoute));
     }
   }
 }

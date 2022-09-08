@@ -17,7 +17,7 @@ class PopularWidget extends StatelessWidget {
         crossAxisAlignment: CrossAxisAlignment.start,
         children: <Widget>[
           Text(
-            'Popular Course',
+            'Villes',
             textAlign: TextAlign.left,
             style: TextStyle(
               fontWeight: FontWeight.w600,
