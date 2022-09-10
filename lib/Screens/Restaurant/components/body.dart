@@ -320,53 +320,9 @@ class _BodyState extends State<Body> with TickerProviderStateMixin {
 };
 
   buildTabContext() => DescriptionWidget(testText: testText);
-  _buildMap() => MapLocationWidget();
+  _buildMap() => {};
 }
 
-class MapLocationWidget extends StatelessWidget {
-  const MapLocationWidget({
-    Key? key,
-  }) : super(key: key);
-
-  @override
-  Widget build(BuildContext context) {
-    return Card(
-      shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(15)),
-      margin: EdgeInsets.symmetric(horizontal: 12),
-      elevation: 5,
-      clipBehavior: Clip.antiAlias,
-      child: Column(
-        children: [
-          const ListTile(
-            leading: Icon(Icons.map),
-            title: Text('Description'),
-          ),
-          Container(
-            padding: EdgeInsets.all(20),
-            width: SizeConfig.blockSizeHorizontal * 95,
-            height: SizeConfig.blockSizeVertical * 50,
-            child: GoogleMap(
-              scrollGesturesEnabled: true,
-              mapType: MapType.normal,
-              gestureRecognizers: Set()
-                ..add(Factory<EagerGestureRecognizer>(
-                    () => EagerGestureRecognizer())),
-              initialCameraPosition: CameraPosition(
-                  target: LatLng(52.2165157, 6.9437819), zoom: 14.5),
-              markers: {
-                Marker(
-                    markerId: MarkerId("source"),
-                    position: LatLng(52.2165157, 6.9437819),
-                    icon: BitmapDescriptor.defaultMarkerWithHue(
-                        BitmapDescriptor.hueYellow)),
-              },
-            ),
-          ),
-        ],
-      ),
-    );
-  }
-}
 
 class ProductSocialWidget extends StatelessWidget {
   const ProductSocialWidget({
@@ -581,7 +537,7 @@ class MenuList extends StatelessWidget {
         child: GestureDetector(
           behavior: HitTestBehavior.opaque,
           onTap: () {
-           Navigator.pushNamed(context, AppRouter.itemRoute);
+           Navigator.pushNamed(context, AppRouter.itemRoute, arguments: [List<dynamic>]);
           },
           onLongPress: () {},
           child: Hero(

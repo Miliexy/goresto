@@ -1,6 +1,7 @@
 import 'package:carousel_slider/carousel_slider.dart';
 import 'package:flutter/material.dart';
 import 'package:goresto/Screens/Restaurant/components/CalendarWidget.dart';
+import 'package:goresto/Screens/Restaurant/components/StaticMapWidget.dart';
 import 'package:goresto/Screens/components/commentSection.dart';
 import 'package:goresto/Screens/components/roundedIcnBtn.dart';
 import 'package:goresto/Screens/introduction_animation/components/defaultText.dart';
@@ -236,6 +237,10 @@ class _Body2State extends State<Body2> with TickerProviderStateMixin {
                       SizedBox(
                         height: SizeConfig.blockSizeVertical * 2,
                       ),
+                      MapLocationWidget(),
+                      SizedBox(
+                        height: SizeConfig.blockSizeVertical * 2,
+                      ),
                       ProductTagsWidget(data: data["Tags"]),
                       SizedBox(
                         height: SizeConfig.blockSizeVertical * 2,
@@ -252,9 +257,8 @@ class _Body2State extends State<Body2> with TickerProviderStateMixin {
                   ),
                 ),
                 CommentSection(testText: ysWelcomeText),
-                Container(
-                  color: Colors.pink,
-                )
+                MenuList()
+
               ],
             )),
         /*SlideTransition(

@@ -132,6 +132,7 @@ class _MapTestState extends State<MapTest> {
             onMapCreated: (cont) => setState(() {
               mapController = cont;
               controller.googleMapController = cont;
+
             }),
           ),
           CustomInfoWindow((top, left, width, height) => null, controller: controller  ,),

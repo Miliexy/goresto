@@ -64,9 +64,10 @@ class NewHomeScreenState extends State<NewHomeScreen> {
   @override
   Widget build(BuildContext context) {
     SizeConfig().init(context);
-    _opacity = _scrollPosition < SizeConfig.blockSizeVertical * 25
-        ? _scrollPosition / (SizeConfig.blockSizeVertical * 25)
+    _opacity = _scrollPosition < SizeConfig.blockSizeVertical * 17
+        ? _scrollPosition / (SizeConfig.blockSizeVertical * 17)
         : 1;
+
     return Scaffold(
       appBar: PreferredSize(
         child: AppBar(

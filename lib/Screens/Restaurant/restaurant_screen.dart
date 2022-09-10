@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
+import 'package:flutter_config/flutter_config.dart';
 import 'package:goresto/Screens/Restaurant/components/Body2.dart';
 import 'package:goresto/size_config.dart';
 

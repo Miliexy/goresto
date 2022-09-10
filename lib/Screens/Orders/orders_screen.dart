@@ -15,7 +15,7 @@ class OrdersScreen extends StatelessWidget {
         appBar: AppBar(
           backgroundColor: Colors.grey.shade300,
           elevation: 0,
-          title: Text("Favourites", style: TextStyle(color: Colors.black),),
+          title: Text("Orders", style: TextStyle(color: Colors.black),),
           centerTitle: true,
           systemOverlayStyle: SystemUiOverlayStyle(
               statusBarIconBrightness: Brightness.dark,
