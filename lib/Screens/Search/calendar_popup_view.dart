@@ -1,4 +1,4 @@
-import 'package:goresto/Screens/Search/hotel_app_theme.dart';
+import 'package:goresto/hotel_app_theme.dart';
 import 'package:flutter/material.dart';
 import 'package:intl/intl.dart';
 
@@ -80,7 +80,7 @@ class _CalendarPopupViewState extends State<CalendarPopupView>
                     padding: const EdgeInsets.all(24.0),
                     child: Container(
                       decoration: BoxDecoration(
-                        color: HotelAppTheme.buildDarkTheme().backgroundColor,
+                        color: GorestoAppTheme.buildDarkTheme().backgroundColor,
                         borderRadius:
                             const BorderRadius.all(Radius.circular(24.0)),
                         boxShadow: <BoxShadow>[
@@ -135,7 +135,7 @@ class _CalendarPopupViewState extends State<CalendarPopupView>
                                 Container(
                                   height: 74,
                                   width: 1,
-                                  color: HotelAppTheme.buildDarkTheme()
+                                  color: GorestoAppTheme.buildDarkTheme()
                                       .dividerColor,
                                 ),
                                 Expanded(
@@ -191,7 +191,7 @@ class _CalendarPopupViewState extends State<CalendarPopupView>
                               child: Container(
                                 height: 48,
                                 decoration: BoxDecoration(
-                                  color: HotelAppTheme.buildDarkTheme()
+                                  color: GorestoAppTheme.buildDarkTheme()
                                       .primaryColor,
                                   borderRadius: const BorderRadius.all(
                                       Radius.circular(24.0)),

@@ -53,13 +53,30 @@ Nous associons en effet les grands classiques de l’art culinaire marocain et a
     "imagePath": "assets/images/fine-dining2.jpg",
     "logo": "assets/images/restaurant_Avatar1.png",
     "Tags": [
-      tagsList[3].values,
+      tagsList[0],
     ],
     "minPrice": 19,
     "maxPrice": 549,
-    "city": citiesList.Rabat,
-    "categories": [categoriesList[2],],
-    "rating": 2
+    "city": citiesList.Casablanca,
+    "categories": [categoriesList[3],categoriesList[1]],
+    "rating": 4.5,
+    "social": [
+      {
+        "FaceBook": "https://www.facebook.com/lecuistotraditionnel",
+        "icon": FontAwesomeIcons.facebook,
+        "color": 0xFF4267B2
+      },
+      {
+        "Instagram": "https://www.instagram.com/le_cuistot_traditionnel",
+        "icon": FontAwesomeIcons.instagram,
+        "color": 0xFF833ab4
+      },
+      {
+        "Site": "https://lecuistot-traditionnel.com/",
+        "icon": FontAwesomeIcons.globe,
+        "color": kSecondaryColor.value
+      }
+    ]
   },
   {
     "name": "Capiano",
@@ -71,13 +88,30 @@ Nous associons en effet les grands classiques de l’art culinaire marocain et a
     "imagePath": "assets/images/fine-dining3.jpg",
     "logo": "assets/images/restaurant_Avatar2.png",
     "Tags": [
-      tagsList[0].values,
+      tagsList[0],
     ],
-    "minPrice": 20,
+    "minPrice": 19,
     "maxPrice": 549,
-    "city": citiesList.Tanger,
-    "categories": [categoriesList[1],],
-    "rating": 3
+    "city": citiesList.Casablanca,
+    "categories": [categoriesList[3],categoriesList[1]],
+    "rating": 4.5,
+    "social": [
+      {
+        "FaceBook": "https://www.facebook.com/lecuistotraditionnel",
+        "icon": FontAwesomeIcons.facebook,
+        "color": 0xFF4267B2
+      },
+      {
+        "Instagram": "https://www.instagram.com/le_cuistot_traditionnel",
+        "icon": FontAwesomeIcons.instagram,
+        "color": 0xFF833ab4
+      },
+      {
+        "Site": "https://lecuistot-traditionnel.com/",
+        "icon": FontAwesomeIcons.globe,
+        "color": kSecondaryColor.value
+      }
+    ]
   },
 ];
 

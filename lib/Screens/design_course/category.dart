@@ -77,7 +77,7 @@ class CategoryListViewState extends State<CategoryListView>
 }
 
 class CategoryView extends StatelessWidget {
-  const CategoryView(
+  CategoryView(
       {Key? key,
       required this.restaurant,
       this.animationController,
@@ -92,7 +92,7 @@ class CategoryView extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    final List<Placemark> placemark = restaurant["placemark"];
+  List<Placemark> placemark = restaurant["placemark"];
 
     return AnimatedBuilder(
       animation: animationController!,

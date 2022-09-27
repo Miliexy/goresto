@@ -1,12 +1,14 @@
 import 'dart:typed_data';
 
 import 'package:flutter/material.dart';
-import 'package:flutter_config/flutter_config.dart';
+import 'package:goresto/Services/SecretLoader.dart';
 import 'package:goresto/constansts.dart';
 import 'package:goresto/size_config.dart';
 import 'package:http/http.dart' as http;
 import 'package:flutter/services.dart' show rootBundle;
 import 'dart:ui' as ui;
+
+import '../../../Services/Secret.dart';
 
 class MapLocationWidget extends StatelessWidget {
   const MapLocationWidget({
@@ -87,8 +89,9 @@ class MapLocationWidget extends StatelessWidget {
   }
 
   Future<http.Response> fetchData() async {
+    Secret secret = await SecretLoader(secretPath: "secrets.json").load();
     var response = await http.get(Uri.parse(
-        'https://maps.googleapis.com/maps/api/staticmap?&zoom=15&size=600x600&markers=size:mid|color:red|label:S|33.59289683131272, -7.6213941404167205&key=${FlutterConfig.get('GOOGLE_MAPS_API_KEY')}'));
+        'https://maps.googleapis.com/maps/api/staticmap?&zoom=15&size=600x600&markers=size:mid|color:red|label:S|33.59289683131272, -7.6213941404167205&key=${secret.apiKey}'));
     return response;
   }
 }

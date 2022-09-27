@@ -51,8 +51,10 @@ dependencies:
   flutter_multi_formatter: ^2.7.2
   date_format: ^2.0.6
   intl_phone_field: ^3.1.0
-  flutter_config: ^2.0.0
   http: ^0.13.5
+  flutter_typeahead: ^4.1.1
+  json_theme: ^4.0.1+2
+  expandable: ^5.0.1
 
 dev_dependencies:
   flutter_test:
@@ -80,6 +82,9 @@ flutter:
   assets:
      - assets/images/
      - assets/google_fonts/
+     - secrets.json
+     - assets/appainter_theme.json
+     - assets/logo/
   #   - images/a_dot_ham.jpeg
 
   # An image asset can refer to one or more resolution-specific "variants", see

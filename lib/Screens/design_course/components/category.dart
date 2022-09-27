@@ -35,7 +35,7 @@ class CategoryWidget extends StatelessWidget {
           height: SizeConfig.blockSizeVertical * 3,
         ),
         SizedBox(
-          height: SizeConfig.blockSizeVertical * 8,
+          height: SizeConfig.blockSizeVertical * 6,
           child: Padding(
             padding: EdgeInsets.only(left: SizeConfig.blockSizeVertical * 2, right: SizeConfig.blockSizeVertical * 2),
             child: ListView.separated(

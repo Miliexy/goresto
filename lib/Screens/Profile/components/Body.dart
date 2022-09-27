@@ -90,8 +90,7 @@ class ProfileBody extends StatelessWidget {
                           child: Row(
                             children: [
                               CircleAvatar(
-                                  maxRadius: SizeConfig.blockSizeVertical * 8,
-                                  minRadius: SizeConfig.blockSizeVertical * 8,
+                                  radius: SizeConfig.blockSizeVertical * 5,
                                   backgroundColor: kPrimaryColor,
                                   backgroundImage:
                                   AssetImage("assets/images/user_avatar.png")),

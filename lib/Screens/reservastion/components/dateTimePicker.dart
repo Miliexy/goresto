@@ -1,3 +1,4 @@
+import 'package:animations/animations.dart';
 import 'package:date_format/date_format.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
@@ -19,7 +20,7 @@ class _DateTimePickerState extends State<DateTimePicker> {
 
   late String dateTime;
 
-  DateTime selectedDate = DateTime.now();
+  DateTime? selectedDate ;
 
   TimeOfDay selectedTime = TimeOfDay(hour: 00, minute: 00);
 
@@ -29,14 +30,15 @@ class _DateTimePickerState extends State<DateTimePicker> {
   Future<Null> _selectDate(BuildContext context) async {
     final DateTime? picked = await showDatePicker(
         context: context,
-        initialDate: selectedDate,
+        initialDate: DateTime.now(),
         initialDatePickerMode: DatePickerMode.day,
         firstDate: DateTime.now(),
         lastDate: DateTime(2101));
     if (picked != null)
       setState(() {
         selectedDate = picked;
-        _dateController.text = DateFormat.yMd().format(selectedDate);
+        print(picked);
+        _dateController.text = DateFormat.yMd().format(picked);
       });
   }
 
@@ -60,7 +62,7 @@ class _DateTimePickerState extends State<DateTimePicker> {
 
   @override
   void initState() {
-    _dateController.text = DateFormat.yMd().format(DateTime.now());
+    _dateController.text = "Date de reservation";
 
     _timeController.text = formatDate(
         DateTime(2019, 08, 1, DateTime.now().hour, DateTime.now().minute),
@@ -69,31 +71,29 @@ class _DateTimePickerState extends State<DateTimePicker> {
   }
 
   @override
+  void dispose() {
+    // TODO: implement dispose
+      super.dispose();
+      _dateController.dispose();
+  }
+
+  @override
   Widget build(BuildContext context) {
     dateTime = DateFormat.yMd().format(DateTime.now());
     return Container(
         child: Column(
           children: <Widget>[
-            Text(
-              'Choose Date',
-              style: TextStyle(
-                  fontStyle: FontStyle.italic,
-                  fontWeight: FontWeight.w600,
-                  letterSpacing: 0.5),
-            ),
             InkWell(
               onTap: () {
                 _selectDate(context);
               },
               child: Container(
                 width: SizeConfig.blockSizeHorizontal * 80,
-                height: SizeConfig.blockSizeVertical * 10,
-                margin: EdgeInsets.only(top: 30),
+                height: SizeConfig.blockSizeVertical * 7,
                 alignment: Alignment.center,
-                decoration: BoxDecoration(color: Colors.grey[200]),
+                decoration: BoxDecoration(color: Colors.grey[100]),
                 child: TextFormField(
-                  style: TextStyle(fontSize: 40),
-                  textAlign: TextAlign.center,
+                  style: TextStyle(fontSize: 20),
                   enabled: false,
                   keyboardType: TextInputType.text,
                   controller: _dateController,
@@ -104,7 +104,8 @@ class _DateTimePickerState extends State<DateTimePicker> {
                       disabledBorder:
                       UnderlineInputBorder(borderSide: BorderSide.none),
                       // labelText: 'Time',
-                      contentPadding: EdgeInsets.only(top: 0.0)),
+                    prefixIcon: Icon(Icons.calendar_month)
+                  ),
                 ),
               ),
             ),

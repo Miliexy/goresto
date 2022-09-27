@@ -13,33 +13,39 @@ class OrdersScreen extends StatelessWidget {
     var itemCount = 0;
     return Scaffold(
         appBar: AppBar(
-          backgroundColor: Colors.grey.shade300,
           elevation: 0,
-          title: Text("Orders", style: TextStyle(color: Colors.black),),
-          centerTitle: true,
-          systemOverlayStyle: SystemUiOverlayStyle(
-              statusBarIconBrightness: Brightness.dark,
-              statusBarBrightness: Brightness.light
+          title: Text(
+            "Orders",
+            style: Theme.of(context).textTheme.titleLarge
+
           ),
-          automaticallyImplyLeading: false,
+          centerTitle: true,
         ),
         body: NestedScrollView(
             headerSliverBuilder: (context, innerBoxIsScrolled) {
               return [
-                SliverPinnedHeader(child: Container(color: Colors.grey,))
+                SliverPinnedHeader(
+                    child: Container(
+                  color: Colors.grey,
+                ))
               ];
             },
-            body: itemCount == 0 ? Center( child: Column(
-              mainAxisAlignment: MainAxisAlignment.center,
-              children: [
-                Text("Your List is Empty"),
-              ],
-            )) : ListView(
-              children: [
-
-              ],
-            )
-        )
-    );
+            body: itemCount == 0
+                ? Center(
+                    child: Column(
+                    mainAxisAlignment: MainAxisAlignment.center,
+                    children: [
+                      ColorFiltered(
+                          child: Image.asset("assets/images/empty_list.png"),
+                          colorFilter: ColorFilter.mode(
+                            Colors.grey.withAlpha(5),
+                            BlendMode.difference
+                          ),),
+                      Text("Your List is Empty"),
+                    ],
+                  ))
+                : ListView(
+                    children: [],
+            )));
   }
 }

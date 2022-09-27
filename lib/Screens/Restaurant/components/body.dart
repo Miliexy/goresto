@@ -147,14 +147,7 @@ class _BodyState extends State<Body> with TickerProviderStateMixin {
                                                   ),
                                                   Text(
                                                     "Description",
-                                                    style: GoogleFonts
-                                                        .montserratAlternates(
-                                                            fontWeight:
-                                                                FontWeight.w500,
-                                                            fontSize: 13,
-                                                            color: const Color(
-                                                                0xe8727171)),
-                                                  ),
+                                                    style: Theme.of(context).textTheme.titleLarge)
                                                 ],
                                               ),
                                             ],
@@ -500,15 +493,15 @@ class DescriptionWidget extends StatelessWidget {
       clipBehavior: Clip.antiAlias,
       child: Column(
         children: [
-          const ListTile(
+          ListTile(
             leading: Icon(Icons.view_headline),
-            title: Text('Description'),
+            title: Text('Description', style: Theme.of(context).textTheme.titleLarge,),
           ),
           Padding(
             padding: const EdgeInsets.all(16.0),
             child: Text(
               testText,
-              style: TextStyle(color: Colors.black.withOpacity(0.6)),
+              style: Theme.of(context).textTheme.bodyMedium,
             ),
           ),
         ],

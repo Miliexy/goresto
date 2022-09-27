@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
 
-class HotelAppTheme {
+class GorestoAppTheme {
   static TextTheme _buildTextTheme(TextTheme base) {
     const String fontName = 'WorkSans';
     return base.copyWith(
@@ -21,8 +22,8 @@ class HotelAppTheme {
   }
 
   static ThemeData buildLightTheme() {
-    final Color primaryColor = Color(0xFF54D3C2);
-    final Color secondaryColor = Color(0xFF54D3C2);
+    final Color primaryColor = Color(0xff6c1cff);
+    final Color secondaryColor = Color(0xff6c1cff);
     final ColorScheme colorScheme = const ColorScheme.light().copyWith(
       primary: primaryColor,
       secondary: secondaryColor,
@@ -35,7 +36,7 @@ class HotelAppTheme {
       splashColor: Colors.white24,
       splashFactory: InkRipple.splashFactory,
       canvasColor: Colors.white,
-      backgroundColor: const Color(0xFFFFFFFF),
+      backgroundColor: const Color(0xff6c1cff),
       scaffoldBackgroundColor: const Color(0xFFF6F6F6),
       errorColor: const Color(0xFFB00020),
       buttonTheme: ButtonThemeData(
@@ -45,12 +46,15 @@ class HotelAppTheme {
       textTheme: _buildTextTheme(base.textTheme),
       primaryTextTheme: _buildTextTheme(base.primaryTextTheme),
       platform: TargetPlatform.iOS,
+      appBarTheme: AppBarTheme(
+        systemOverlayStyle: SystemUiOverlayStyle.dark
+      )
     );
   }
 
   static ThemeData buildDarkTheme() {
-    final Color primaryColor = const Color(0xFF6c1cff);
-    final Color secondaryColor = Color(0xFF6c1cff);
+    final Color primaryColor = const Color(0xFFFFFFFF);
+    final Color secondaryColor = Color(0xff6c1cff);
     final ColorScheme colorScheme = const ColorScheme.light().copyWith(
       primary: primaryColor,
       secondary: secondaryColor,
@@ -73,6 +77,9 @@ class HotelAppTheme {
       textTheme: _buildTextTheme(base.textTheme),
       primaryTextTheme: _buildTextTheme(base.primaryTextTheme),
       platform: TargetPlatform.iOS,
+        appBarTheme: AppBarTheme(
+            systemOverlayStyle: SystemUiOverlayStyle.dark
+        )
     );
   }
 }

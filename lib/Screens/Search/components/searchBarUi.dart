@@ -5,9 +5,11 @@ import 'package:goresto/constansts.dart';
 
 class SearchBarUI extends StatelessWidget {
   const SearchBarUI({
-    Key? key,
+    Key? key, required this.hintText, required this.enabled,
   }) : super(key: key);
 
+  final String hintText ;
+  final bool enabled;
 
   @override
   Widget build(BuildContext context) {
@@ -65,11 +67,11 @@ class SearchBarUI extends StatelessWidget {
                     style: const TextStyle(
                       fontSize: 18,
                     ),
-
+                    keyboardType: !enabled ? TextInputType.none: TextInputType.text,
                     cursorColor: kPrimaryColor,
                     decoration: InputDecoration(
                       border: InputBorder.none,
-                      hintText: 'London...',
+                      hintText: hintText,
                     ),
                   ),
                 ),

@@ -116,6 +116,12 @@ class _MapTestState extends State<MapTest> {
       child: Stack(
         children: [
           GoogleMap(
+            myLocationEnabled: false,
+            zoomGesturesEnabled: true,
+            scrollGesturesEnabled: true,
+            tiltGesturesEnabled: false,
+            rotateGesturesEnabled: true,
+            zoomControlsEnabled: false,
             onTap: (position) {
               controller.hideInfoWindow!();
             },

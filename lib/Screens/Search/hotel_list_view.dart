@@ -2,7 +2,7 @@ import 'package:geocoding/geocoding.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_rating_bar/flutter_rating_bar.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
-import 'package:goresto/Screens/Search/hotel_app_theme.dart';
+import 'package:goresto/hotel_app_theme.dart';
 
 
 class RestaurantListView extends StatelessWidget {
@@ -63,7 +63,7 @@ class RestaurantListView extends StatelessWidget {
                               ),
                             ),
                             Container(
-                              color: HotelAppTheme.buildDarkTheme()
+                              color: GorestoAppTheme.buildDarkTheme()
                                   .backgroundColor,
                               child: Row(
                                 mainAxisAlignment: MainAxisAlignment.center,
@@ -107,7 +107,7 @@ class RestaurantListView extends StatelessWidget {
                                                 Icon(
                                                   FontAwesomeIcons.locationDot,
                                                   size: 12,
-                                                  color: HotelAppTheme
+                                                  color: GorestoAppTheme
                                                           .buildDarkTheme()
                                                       .primaryColor,
                                                 ),
@@ -139,20 +139,20 @@ class RestaurantListView extends StatelessWidget {
                                                     ratingWidget: RatingWidget(
                                                       full: Icon(
                                                         Icons.star_rate_rounded,
-                                                        color: HotelAppTheme
+                                                        color: GorestoAppTheme
                                                                 .buildDarkTheme()
                                                             .primaryColor,
                                                       ),
                                                       half: Icon(
                                                         Icons.star_half_rounded,
-                                                        color: HotelAppTheme
+                                                        color: GorestoAppTheme
                                                                 .buildDarkTheme()
                                                             .primaryColor,
                                                       ),
                                                       empty: Icon(
                                                         Icons
                                                             .star_border_rounded,
-                                                        color: HotelAppTheme
+                                                        color: GorestoAppTheme
                                                                 .buildDarkTheme()
                                                             .primaryColor,
                                                       ),
@@ -224,7 +224,7 @@ class RestaurantListView extends StatelessWidget {
                                 padding: const EdgeInsets.all(8.0),
                                 child: Icon(
                                   Icons.favorite_border,
-                                  color: HotelAppTheme.buildDarkTheme()
+                                  color: GorestoAppTheme.buildDarkTheme()
                                       .primaryColor,
                                 ),
                               ),

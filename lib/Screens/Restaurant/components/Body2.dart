@@ -1,14 +1,18 @@
+import 'package:animations/animations.dart';
 import 'package:carousel_slider/carousel_slider.dart';
 import 'package:flutter/material.dart';
 import 'package:goresto/Screens/Restaurant/components/CalendarWidget.dart';
 import 'package:goresto/Screens/Restaurant/components/StaticMapWidget.dart';
 import 'package:goresto/Screens/components/commentSection.dart';
 import 'package:goresto/Screens/components/roundedIcnBtn.dart';
+import 'package:goresto/Screens/delivery/delivery_menu.dart';
+import 'package:goresto/Screens/delivery/delivery_screen.dart';
 import 'package:goresto/Screens/introduction_animation/components/defaultText.dart';
+import 'package:goresto/Screens/reservastion/components/checkout_screen.dart';
 import 'package:goresto/constansts.dart';
-import 'package:goresto/routes.dart';
 import 'package:goresto/size_config.dart';
 import 'package:sliver_tools/sliver_tools.dart';
+import 'menu_list.dart' as menu;
 
 import 'body.dart';
 
@@ -27,6 +31,7 @@ class _Body2State extends State<Body2> with TickerProviderStateMixin {
   double _scrollPosition = 0;
   double _opacity = 0;
   late final Map<String, dynamic> data;
+  final bool _isDisabled = false;
 
   _scrollListener() {
     setState(() {
@@ -64,8 +69,8 @@ class _Body2State extends State<Body2> with TickerProviderStateMixin {
 
   @override
   Widget build(BuildContext context) {
-    final _searchAnimation =
-        Tween(begin: Offset(0, 2), end: Offset(0, 0.21)).animate(CurvedAnimation(
+    final _searchAnimation = Tween(begin: Offset(0, 2), end: Offset(0, 0.21))
+        .animate(CurvedAnimation(
       parent: _animationController!,
       curve: Interval(
         0.3,
@@ -79,7 +84,6 @@ class _Body2State extends State<Body2> with TickerProviderStateMixin {
     return Stack(
       children: [
         NestedScrollView(
-            physics: NeverScrollableScrollPhysics(),
             controller: _scrollController,
             headerSliverBuilder: (context, innerBoxIsScrolled) {
               return [
@@ -107,25 +111,28 @@ class _Body2State extends State<Body2> with TickerProviderStateMixin {
                               top: SizeConfig.blockSizeVertical * 25,
                               left: 20,
                               child: CircleAvatar(
-                                backgroundImage: AssetImage(
-                                    data["logo"]),
+                                backgroundImage: AssetImage(data["logo"]),
                                 radius: SizeConfig.blockSizeVertical * 5,
                               )),
                           SliverAppBar(
                             collapsedHeight: SizeConfig.blockSizeVertical * 8,
                             pinned: true,
                             snap: true,
-                            backgroundColor:
-                                kSecondaryColor.withOpacity(_opacity),
+                            backgroundColor: Colors.white.withOpacity(_opacity),
                             floating: true,
                             automaticallyImplyLeading: false,
-                            leading: Padding(
-                              child: RoundedIcnBtn(
-                                opacity: 0.8,
-                                press:() => Navigator.pop(context),
-                                iconData: Icons.arrow_back_ios_new,
+                            leading: InkWell(
+                              child: Container(
+                                decoration: BoxDecoration(
+                                  shape: BoxShape.circle,
+                                  color: Colors.white.withOpacity(0.8)
+                                ),
+                                child: Icon(
+                                  Icons.arrow_back_ios_new,
+                                  color: Theme.of(context).iconTheme.color,
+                                ),
                               ),
-                              padding:  EdgeInsets.only(left: SizeConfig.blockSizeHorizontal * 1),
+                              onTap: () => Navigator.of(context).pop(),
                             ),
                             actions: [
                               RoundedIcnBtn(
@@ -134,7 +141,8 @@ class _Body2State extends State<Body2> with TickerProviderStateMixin {
                                 opacity: double.parse('0.8'),
                               ),
                               Padding(
-                                padding:  EdgeInsets.only(right: SizeConfig.blockSizeHorizontal * 2),
+                                padding: EdgeInsets.only(
+                                    right: SizeConfig.blockSizeHorizontal * 2),
                                 child: RoundedIcnBtn(
                                   iconData: Icons.share,
                                   press: () {},
@@ -145,8 +153,10 @@ class _Body2State extends State<Body2> with TickerProviderStateMixin {
                             title: Text(
                               data["name"],
                               style: TextStyle(
-                                fontSize: 19,
-                                  color: kPrimaryColor.withOpacity(_opacity)),
+                                fontFamily: Theme.of(context).textTheme.titleLarge?.fontFamily,
+                                color: kSecondaryColor.withOpacity(_opacity),
+                                fontWeight: Theme.of(context).textTheme.titleLarge?.fontWeight,
+                              ),
                               overflow: TextOverflow.ellipsis,
                               softWrap: false,
                               maxLines: 1,
@@ -227,7 +237,8 @@ class _Body2State extends State<Body2> with TickerProviderStateMixin {
                   child: Column(
                     children: [
                       InfoBar(),
-                      DescriptionWidget(testText: data["description"],
+                      DescriptionWidget(
+                        testText: data["description"],
                       ),
                       SizedBox(
                         height: SizeConfig.blockSizeVertical * 2,
@@ -257,8 +268,7 @@ class _Body2State extends State<Body2> with TickerProviderStateMixin {
                   ),
                 ),
                 CommentSection(testText: ysWelcomeText),
-                MenuList()
-
+                menu.MenuList()
               ],
             )),
         /*SlideTransition(
@@ -278,23 +288,81 @@ class _Body2State extends State<Body2> with TickerProviderStateMixin {
             color: Colors.white,
             width: SizeConfig.blockSizeHorizontal * 100,
             child: Padding(
-              padding: const EdgeInsets.all(8.0),
+              padding: EdgeInsets.symmetric(horizontal: SizeConfig.blockSizeHorizontal * 15, vertical: SizeConfig.blockSizeVertical * 1),
               child: ElevatedButton(
                 child: Text("Reserver",
-                    style:
-                        TextStyle(fontSize: fontTitleSize, letterSpacing: 1.2)),
-                onPressed: () {
-                  //_scrollToTop();
-                  Navigator.pushNamed(context, AppRouter.bookingRoute);
-                },
+                    style:Theme.of(context).primaryTextTheme.headline6),
+                onPressed: _isDisabled
+                    ? null
+                    : () {
+                  showModal(configuration: FadeScaleTransitionConfiguration(),
+                    context: context, builder: (context) {
+                    return Material(
+                      type: MaterialType.transparency,
+                      child: Container(
+                        width: SizeConfig.blockSizeHorizontal * 100,
+                        height: SizeConfig.blockSizeVertical * 88,
+                        child: Column(
+                          mainAxisSize: MainAxisSize.min,
+                          children: [
+                            InkWell(
+                              onTap: (){
+                                _scrollToTop();
+                                Navigator.of(context).push(MaterialPageRoute(
+                                  builder: (context) => ConfirmationScreen(),
+                                ));
+                              },
+                              child: Container(
+                                height: SizeConfig.blockSizeVertical * 40,
+                                decoration: BoxDecoration(
+                                  image: DecorationImage(
+                                    image: AssetImage("assets/images/reserved_table.jpg"),
+                                    fit: BoxFit.fill,
+                                    colorFilter: ColorFilter.mode(Colors.black.withOpacity(0.55), BlendMode.srcATop),
+                                  )
+                                ),
+                                child: Center(
+                                  child: Text("Reserver", style: Theme.of(context).primaryTextTheme.headline2,),
+                                ),
+                              ),
+                            ),
+                            InkWell(
+                              onTap: (){
+                                _scrollToTop();
+                                Navigator.of(context).push(MaterialPageRoute(
+                                  builder: (context) => DeliveryMenu(),
+                                ));
+                              },
+                              child: Container(
+                                height: SizeConfig.blockSizeVertical * 40,
+                                decoration: BoxDecoration(
+                                    image: DecorationImage(
+                                      image: AssetImage("assets/images/delivery2.jpg"),
+                                      fit: BoxFit.fill,
+                                      colorFilter: ColorFilter.mode(Colors.black.withOpacity(0.55), BlendMode.srcATop),
+                                    )
+                                ),
+                                child: Center(
+                                  child: Text("Delivery", style: Theme.of(context).primaryTextTheme.headline2,),
+                                ),
+                              ),
+                            )
+                          ],
+                        ),
+                      ),
+                    );
+                  },);
+                      },
                 style: ButtonStyle(
-                  backgroundColor: MaterialStateProperty.all(kSecondaryColor),
+                  backgroundColor: _isDisabled
+                      ? MaterialStateProperty.all(Colors.grey)
+                      : MaterialStateProperty.all(kSecondaryColor),
                   shape: MaterialStateProperty.all(RoundedRectangleBorder(
                       borderRadius: BorderRadius.circular(
-                          SizeConfig.blockSizeVertical * 5))),
-                  minimumSize: MaterialStateProperty.all(Size(
-                      SizeConfig.blockSizeHorizontal * 80,
-                      SizeConfig.blockSizeVertical * 8)),
+                          SizeConfig.blockSizeVertical * 4))),
+                  fixedSize: MaterialStateProperty.all(Size(
+                      SizeConfig.blockSizeHorizontal * 50,
+                      SizeConfig.blockSizeVertical * 7)),
                 ),
               ),
             ),
