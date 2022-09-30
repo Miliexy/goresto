@@ -5,11 +5,11 @@ name: CI
 on:
   # Triggers the workflow on push or pull request events but only for the main branch
   push:
-    branches: [master]
+    branches: [NewBranch2]
     paths-ignore:
       - '**/README.md'
   pull_request:
-    branches: [master]
+    branches: [NewBranch2]
 
   # Allows you to run this workflow manually from the Actions tab
   workflow_dispatch:
@@ -40,7 +40,12 @@ jobs:
           uses: actions/upload-artifact@v3
           with:
             name: release-apk
-            path: build/app/outputs/apk/release/app-release.apk
+            path: build/app/outputs/flutter-apk/app-release.apk
+        - name: Upload APP Bundle
+          uses: actions/upload-artifact@v3
+          with:
+            name: release-aab
+            path: build/app/outputs/bundle/release/app-release.aab
 
         - name: Upload Screenshoots
           uses: actions/upload-artifact@v3

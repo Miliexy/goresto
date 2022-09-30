@@ -1,4 +1,4 @@
-import 'package:goresto/Screens/search/hotel_app_theme.dart';
+import 'package:goresto/hotel_app_theme.dart';
 import 'package:flutter/material.dart';
 
 class RangeSliderView extends StatefulWidget {
@@ -76,8 +76,6 @@ class _RangeSliderViewState extends State<RangeSliderView> {
               values: _values!,
               min: 0.0,
               max: 1000.0,
-              activeColor: HotelAppTheme.buildDarkTheme().primaryColor,
-              inactiveColor: Colors.grey.withOpacity(0.4),
               divisions: 1000,
               onChanged: (RangeValues values) {
                 try {

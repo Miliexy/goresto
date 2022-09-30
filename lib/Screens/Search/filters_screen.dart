@@ -3,7 +3,7 @@ import 'package:flutter/material.dart';
 import 'package:goresto/Screens/testData/dataList.dart';
 import 'range_slider_view.dart';
 import 'slider_view.dart';
-import 'hotel_app_theme.dart';
+import 'package:goresto/hotel_app_theme.dart';
 import 'model/popular_filter_list.dart';
 
 class FiltersScreen extends StatefulWidget {
@@ -23,7 +23,7 @@ class _FiltersScreenState extends State<FiltersScreen> {
   @override
   Widget build(BuildContext context) {
     return Container(
-      color: HotelAppTheme.buildDarkTheme().backgroundColor,
+      color: GorestoAppTheme.buildDarkTheme().backgroundColor,
       child: Scaffold(
         backgroundColor: Colors.transparent,
         body: Column(
@@ -59,7 +59,7 @@ class _FiltersScreenState extends State<FiltersScreen> {
               child: Container(
                 height: 48,
                 decoration: BoxDecoration(
-                  color: HotelAppTheme.buildDarkTheme().primaryColor,
+                  color: GorestoAppTheme.buildDarkTheme().primaryColor,
                   borderRadius: const BorderRadius.all(Radius.circular(24.0)),
                   boxShadow: <BoxShadow>[
                     BoxShadow(
@@ -150,10 +150,7 @@ class _FiltersScreenState extends State<FiltersScreen> {
                       style: TextStyle(color: Colors.black),
                     ),
                   ),
-                  CupertinoSwitch(
-                    activeColor: date.isSelected
-                        ? HotelAppTheme.buildDarkTheme().primaryColor
-                        : Colors.grey.withOpacity(0.6),
+                  Switch(
                     onChanged: (bool value) {
                       setState(() {
                         checkAppPosition(i);
@@ -221,7 +218,6 @@ class _FiltersScreenState extends State<FiltersScreen> {
             'Distance from city center',
             textAlign: TextAlign.left,
             style: TextStyle(
-                color: Colors.grey,
                 fontSize: MediaQuery.of(context).size.width > 360 ? 18 : 16,
                 fontWeight: FontWeight.normal),
           ),
@@ -251,7 +247,6 @@ class _FiltersScreenState extends State<FiltersScreen> {
             'Popular filters',
             textAlign: TextAlign.left,
             style: TextStyle(
-                color: Colors.grey,
                 fontSize: MediaQuery.of(context).size.width > 360 ? 18 : 16,
                 fontWeight: FontWeight.normal),
           ),
@@ -296,9 +291,6 @@ class _FiltersScreenState extends State<FiltersScreen> {
                           e["isSelected"]
                               ? Icons.check_box
                               : Icons.check_box_outline_blank,
-                          color: e["isSelected"]
-                              ? HotelAppTheme.buildDarkTheme().primaryColor
-                              : Colors.grey.withOpacity(0.6),
                         ),
                         const SizedBox(
                           width: 4,
@@ -324,7 +316,7 @@ class _FiltersScreenState extends State<FiltersScreen> {
         Padding(
           padding: const EdgeInsets.all(16.0),
           child: Text(
-            'Price (for 1 night)',
+            'Price range',
             textAlign: TextAlign.left,
             style: TextStyle(
                 color: Colors.grey,
@@ -348,7 +340,7 @@ class _FiltersScreenState extends State<FiltersScreen> {
   Widget getAppBarUI() {
     return Container(
       decoration: BoxDecoration(
-        color: HotelAppTheme.buildDarkTheme().backgroundColor,
+        color: GorestoAppTheme.buildDarkTheme().backgroundColor,
         boxShadow: <BoxShadow>[
           BoxShadow(
               color: Colors.grey.withOpacity(0.2),

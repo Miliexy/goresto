@@ -1,3 +1,4 @@
+import 'package:flutter/services.dart';
 import 'package:geolocator/geolocator.dart';
 import 'package:goresto/Screens/design_course/homePage.dart';
 import 'package:goresto/Screens/introduction_animation/components/booking_view.dart';
@@ -10,6 +11,7 @@ import 'package:goresto/Screens/introduction_animation/components/welcome_view.d
 import 'package:flutter/material.dart';
 import 'package:goresto/Services/location.dart';
 import 'package:goresto/constansts.dart';
+import 'package:goresto/hotel_app_theme.dart';
 import 'package:goresto/routes.dart';
 import 'package:goresto/size_config.dart';
 
@@ -45,11 +47,11 @@ class IntroductionAnimationScreenState
   @override
   Widget build(BuildContext context) {
     SizeConfig().init(context);
-    return Scaffold(
-      backgroundColor: kPrimaryColor,
-
-      body: SafeArea(
-        child: ClipRect(
+    return Theme(
+      data: GorestoAppTheme.buildLightTheme(),
+      child: Scaffold(
+        backgroundColor: kPrimaryColor,
+        body: ClipRect(
           child: Stack(
             children: [
               SplashView(
@@ -179,7 +181,7 @@ class IntroductionAnimationScreenState
               },
             ),
           ),);
-      })).then((value) => Navigator.of(context).pushAndRemoveUntil(createRoute(NewHomeScreen.routeName), (route) => true));
+      })).then((value) => Navigator.pushNamed(context, AppRouter.homeRoute));
     }
   }
 }

@@ -1,8 +1,11 @@
 
+import 'package:flutter_staggered_grid_view/flutter_staggered_grid_view.dart';
 import 'package:geocoding/geocoding.dart';
 import 'package:goresto/Screens/design_course/appTheme.dart';
 import 'package:flutter/material.dart';
+import 'package:goresto/Screens/introduction_animation/components/defaultText.dart';
 import 'package:goresto/constansts.dart';
+import 'package:goresto/routes.dart';
 import 'package:goresto/size_config.dart';
 
 import '../testData/dataList.dart';
@@ -46,7 +49,6 @@ class CategoryListViewState extends State<CategoryListView>
             if (!snapshot.hasData) {
               return const SizedBox();
             } else {
-              print(snapshot.data!);
               return ListView.builder(
                 padding: const EdgeInsets.only(
                     top: 0, bottom: 0, right: 16, left: 16),
@@ -75,7 +77,7 @@ class CategoryListViewState extends State<CategoryListView>
 }
 
 class CategoryView extends StatelessWidget {
-  const CategoryView(
+  CategoryView(
       {Key? key,
       required this.restaurant,
       this.animationController,
@@ -90,7 +92,7 @@ class CategoryView extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    final List<Placemark> placemark = restaurant["placemark"];
+  List<Placemark> placemark = restaurant["placemark"];
 
     return AnimatedBuilder(
       animation: animationController!,
@@ -102,7 +104,120 @@ class CategoryView extends StatelessWidget {
                 100 * (1.0 - animation!.value), 0.0, 0.0),
             child: InkWell(
               splashColor: Colors.red,
-              onTap: callback,
+              onTap: () => Navigator.pushNamed(context, AppRouter.detailsRoute, arguments: restaurant),
+              onLongPress: () {
+                showDialog(context: context, builder: (context) {
+                  return Dialog(
+
+                    child: ClipRRect(
+                      borderRadius: BorderRadius.circular(2),
+                      child: Column(
+                        mainAxisSize: MainAxisSize.min,
+                        children: [
+                          SizedBox(height: SizeConfig.blockSizeVertical * 30,
+                            child: InkWell(
+                              onTap: () {},
+                              child: Stack(
+                                fit: StackFit.expand,
+                                children: [
+                                  ColorFiltered(colorFilter: ColorFilter.mode(
+                                      Colors.black.withOpacity(0.33),
+                                      BlendMode.srcATop),child: Image.asset(restaurant["imagePath"], fit: BoxFit.fill,)),
+                                  Padding(
+                                    padding: EdgeInsets.only(left: SizeConfig.blockSizeVertical * 2),
+                                    child: Align(
+                                      child: Container(
+                                        child: Column(
+                                          mainAxisAlignment: MainAxisAlignment.end,
+                                          children: [
+                                            Spacer(),
+                                            Row(
+                                              children: [
+                                                Text(restaurant["name"],style: TextStyle(color: Colors.white, fontSize: SizeConfig.blockSizeVertical * 3.5),)
+                                              ],
+                                            ),
+                                            Row(
+                                              children: [
+                                                Flexible(child: Text("0606060600",style: TextStyle(color: Colors.white), )),
+                                              ],
+                                            ),
+                                            Row(
+                                              children: [
+                                                Text("Address somewhere" ,style: TextStyle(color: Colors.white)),
+                                              ],
+                                            ),
+                                          ],
+                                        ),
+                                      ),
+                                    ),
+                                  )
+                                ],
+                              ),
+                            ),
+                          ),
+                      Card(
+                        //shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(15)),
+                        //margin: EdgeInsets.symmetric(horizontal: 12),
+                        elevation: 2,
+                        clipBehavior: Clip.hardEdge,
+                        child: Column(
+                          children: [
+                            const ListTile(
+                              leading: Icon(Icons.view_headline),
+                              title: Text('Description'),
+                            ),
+                            Padding(
+                              padding: const EdgeInsets.all(16.0),
+                              child: Text(
+                                ysWelcomeText + ysWelcomeText,
+                                style: TextStyle(color: Colors.black.withOpacity(0.6)),
+                              ),
+                            ),
+                          ],
+                        ),
+                      ),Card(
+                            elevation: 2,
+                            clipBehavior: Clip.hardEdge,
+                            child: Column(
+                              mainAxisAlignment: MainAxisAlignment.start,
+                              children: [
+                                ListTile(
+                                  leading: Icon(Icons.view_module),
+                                  title: Text("Categories"),
+                                ),
+                                Container(
+                                  child: AlignedGridView.count(
+                                    crossAxisCount: 2,
+                                    itemBuilder: (context, index) {
+                                      return InkWell(
+                                        child: Row(
+                                          mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                                          children: [
+                                            CircleAvatar(
+                                              child: Icon(Icons.bookmark_border),
+                                              backgroundColor: kSecondaryColor,
+                                            ),
+                                            Text("Category")
+                                          ],
+                                        ),
+                                        onTap: () {},
+                                      );
+                                    },
+                                    itemCount: 2,
+                                    physics: NeverScrollableScrollPhysics(),
+                                    shrinkWrap: true,
+                                    padding: EdgeInsets.all(25),
+                                  ),
+                                ),
+                              ],
+                            ),
+                          )
+                        ],
+                      ),
+                    ),
+                  );
+                },);
+              },
               child: SizedBox(
                 width: SizeConfig.blockSizeHorizontal * 65,
                 child: Stack(
@@ -267,7 +382,7 @@ class CategoryView extends StatelessWidget {
                           child: AspectRatio(
                               aspectRatio: 1,
                               child: Image.asset(
-                                restaurant["logo"],
+                                restaurant["logo"],fit: BoxFit.contain,
                               )),
                         ),
                       ),

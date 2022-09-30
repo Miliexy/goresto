@@ -96,7 +96,7 @@ class RelaxView extends StatelessWidget {
               SlideTransition(
                 position: _imageAnimation,
                 child: Container(
-                  constraints: BoxConstraints(maxWidth: SizeConfig.blockSizeHorizontal * 90, maxHeight: SizeConfig.blockSizeVertical * 30),
+                  constraints: BoxConstraints(maxHeight: SizeConfig.blockSizeVertical * 30),
                   child: Image.asset(
 
 

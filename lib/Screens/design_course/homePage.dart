@@ -1,13 +1,24 @@
+import 'package:flutter/services.dart';
+import 'package:font_awesome_flutter/font_awesome_flutter.dart';
+import 'package:goresto/Screens/Favourite/favourite_screen.dart';
+import 'package:goresto/Screens/Orders/orders_screen.dart';
+import 'package:goresto/Screens/Profile/profile_screen.dart';
+import 'package:goresto/Screens/Search/search_screen.dart';
+import 'package:goresto/Screens/auth/auth_main_screen.dart';
+import 'package:goresto/Screens/design_course/components/AdsSection.dart';
+import 'package:goresto/Screens/design_course/components/SearchWidget.dart';
 import 'package:goresto/Screens/design_course/newHomeTest.dart';
 import 'package:goresto/Screens/design_course/restaurant_info.dart';
 import 'package:flutter/material.dart';
-import 'package:goresto/Screens/search/hotel_home_screen.dart';
 import 'package:goresto/constansts.dart';
+import 'package:goresto/hotel_app_theme.dart';
 import 'package:goresto/size_config.dart';
 import 'package:sliver_tools/sliver_tools.dart';
+import '../../routes.dart';
 import 'components/AppBar.dart';
 import 'components/category.dart';
 import 'components/popularList.dart';
+import 'dart:ui';
 
 class NewHomeScreen extends StatefulWidget {
   const NewHomeScreen({Key? key}) : super(key: key);
@@ -18,43 +29,93 @@ class NewHomeScreen extends StatefulWidget {
 }
 
 class NewHomeScreenState extends State<NewHomeScreen> {
+  final ScrollController _scrollController = ScrollController();
 
-  var currentIndex = 0;
-  late final List<Widget> _children = [
+  double _scrollPosition = 0, _opacity = 0;
 
-    HomePage(callBack: callBack),
-    const SearchScreen(),
-    const MyHomePage()
-  ];
-  void callBack()
-  {
+  _scrollListener() {
     setState(() {
-      currentIndex = 1;
+      _scrollPosition = _scrollController.position.pixels;
     });
   }
 
   @override
+  void initState() {
+    // TODO: implement initState
+    _scrollController.addListener(_scrollListener);
+    super.initState();
+  }
 
+  @override
+  void dispose() {
+    // TODO: implement dispose
+    _scrollController.removeListener(() {
+      _scrollListener();
+    });
+    _scrollController.dispose();
+    super.dispose();
+  }
+
+  var currentIndex = 0;
+  late final List<Widget> _children = [
+    HomePage(scrollController: _scrollController),
+    OrdersScreen(),
+    FavouriteScreen(),
+    AuthMainScreen()
+  ];
+
+  @override
   Widget build(BuildContext context) {
     SizeConfig().init(context);
+    _opacity = _scrollPosition < SizeConfig.blockSizeVertical * 18
+        ? _scrollPosition / (SizeConfig.blockSizeVertical * 18)
+        : 1;
     return Scaffold(
-      bottomNavigationBar: BottomNavigationBar(
-        items: const [
-          BottomNavigationBarItem(icon: Icon(Icons.home), label: "home"),
-          BottomNavigationBarItem(icon: Icon(Icons.search), label: "search"),
-          BottomNavigationBarItem(icon: Icon(Icons.favorite), label: "fav"),
-        ],
-        onTap: onTabTapped ,
-        currentIndex: currentIndex,
+      appBar: PreferredSize(
+        child: AppBar(
+            systemOverlayStyle: SystemUiOverlayStyle(
+              systemNavigationBarColor: Color(0xff000000),
+              systemNavigationBarIconBrightness: Brightness.light,
+              statusBarColor: Colors.white70.withOpacity(_opacity),
+              statusBarIconBrightness:
+                  _opacity == 1 ? Brightness.dark : Brightness.light,
+              statusBarBrightness: Brightness.light,
+            ),
+            elevation: 0,
+            backgroundColor: Colors.transparent),
+        preferredSize: Size.zero,
+      ),
+      extendBodyBehindAppBar: true,
+      bottomNavigationBar: SizedBox(
+        height: SizeConfig.blockSizeVertical * 10,
+        child: BottomNavigationBar(
+          type: BottomNavigationBarType.shifting,
+          elevation: 5,
+          selectedIconTheme: IconThemeData(color: kSecondaryColor),
+          unselectedLabelStyle: TextStyle(color: Colors.grey),
+          unselectedIconTheme: IconThemeData(color: Colors.grey),
+          items: const [
+            BottomNavigationBarItem(icon: Icon(Icons.home), label: "Home"),
+            BottomNavigationBarItem(
+                icon: Icon(FontAwesomeIcons.tag), label: "Historique"),
+            BottomNavigationBarItem(
+                icon: Icon(Icons.favorite), label: "Favoris"),
+            BottomNavigationBarItem(
+                icon: Icon(FontAwesomeIcons.solidUser), label: "Profil"),
+          ],
+          onTap: onTabTapped,
+          currentIndex: currentIndex,
+        ),
       ),
       body: _children[currentIndex],
     );
   }
 
   void onTabTapped(int index) {
-    setState(() {currentIndex = index;});
+    setState(() {
+      currentIndex = index;
+    });
   }
-
 }
 
 void moveTo(context) {
@@ -66,168 +127,139 @@ void moveTo(context) {
   );
 }
 
-class SearchBarWidget extends StatelessWidget {
-  const SearchBarWidget({
-    Key? key, required  this.callBack,
-  }) : super(key: key);
-  final Function callBack;
+class HomePage extends StatefulWidget {
+  final ScrollController scrollController;
+
+  const HomePage({Key? key, required this.scrollController}) : super(key: key);
+
   @override
-  Widget build(BuildContext context) {
-    return Container(
-      clipBehavior: Clip.hardEdge,
-      decoration: BoxDecoration(
-        color: Colors.white,
-        borderRadius: const BorderRadius.only(
-          bottomRight: Radius.circular(13.0),
-          bottomLeft: Radius.circular(13.0),
-          topLeft: Radius.circular(13.0),
-          topRight: Radius.circular(13.0),
-        ),
-      ),
-      height: SizeConfig.blockSizeVertical * 6,
-      constraints: BoxConstraints(
-          maxWidth: SizeConfig.blockSizeHorizontal * 89
-      ),
-      child: TextFormField(
-        maxLines: 1,
-        expands: false,
-        style: TextStyle(
-          fontFamily: 'WorkSans',
-          fontWeight: FontWeight.bold,
-          fontSize: SizeConfig.blockSizeVertical * 2,
-          color: kSecondaryColor,
-        ),
-        keyboardType: TextInputType.text,
-        readOnly: true,
-        showCursor: true,
-        onTap: () {
-          callBack();
-        },
-        decoration: InputDecoration(
-            hintText: "search",
-            border: OutlineInputBorder(
-              borderRadius: BorderRadius.circular(13),
-            ),
-            focusedBorder: OutlineInputBorder(
-              borderRadius: BorderRadius.circular(13),
-            ),
-            prefixIcon:  Icon(Icons.search, size: SizeConfig.blockSizeVertical * 3,),
-            suffixIcon: IconButton(
-              icon: Icon(Icons.my_location, size: fontTextSize,),
-              onPressed: () {},
-            )),
-        onEditingComplete: () {},
-      ),
-    );
-  }
+  State<HomePage> createState() => _HomePageState();
 }
 
-class HomePage2 extends StatelessWidget {
-  const HomePage2({Key? key}) : super(key: key);
+class _HomePageState extends State<HomePage> {
+  late final ScrollController _scrollController;
 
   @override
-  Widget build(BuildContext context) {
-    return Scaffold(
-      body: Stack(
-        children: [
-          CustomScrollView(
-            slivers: <Widget>[
-              SliverToBoxAdapter(
-                child: Container(color: Colors.red, height: SizeConfig.blockSizeVertical *15 ,),
-              ),
-              SliverAppBar(
-                title: SearchBarWidget(callBack: () {}),
-                pinned: true,
-              ),
-
-              SliverGrid(
-                gridDelegate: const SliverGridDelegateWithMaxCrossAxisExtent(
-                  maxCrossAxisExtent: 200.0,
-                  mainAxisSpacing: 10.0,
-                  crossAxisSpacing: 10.0,
-                  childAspectRatio: 4.0,
-                ),
-                delegate: SliverChildBuilderDelegate(
-                      (BuildContext context, int index) {
-                    return Container(
-                      alignment: Alignment.center,
-                      color: Colors.teal[100 * (index % 9)],
-                      child: Text('Grid Item $index'),
-                    );
-                  },
-                  childCount: 20,
-                ),
-              ),
-              SliverFixedExtentList(
-                itemExtent: 50.0,
-                delegate: SliverChildBuilderDelegate(
-                      (BuildContext context, int index) {
-                    return Container(
-                      alignment: Alignment.center,
-                      color: Colors.lightBlue[100 * (index % 9)],
-                      child: Text('List Item $index'),
-                    );
-                  },
-                ),
-              ),
-            ],
-          ),
-        ],
-      ),
-    );
+  void initState() {
+    // TODO: implement initState
+    _scrollController = widget.scrollController;
+    super.initState();
   }
-}
 
-
-class HomePage extends StatelessWidget {
-  const HomePage({Key? key, required this.callBack}) : super(key: key);
-  final Function callBack;
   @override
   Widget build(BuildContext context) {
+    print('${MediaQueryData.fromWindow(window).padding.top} ad');
     return CustomScrollView(
+      controller: _scrollController,
       slivers: [
-        SliverStack(children: [
-          SliverToBoxAdapter(child: Container(
-            clipBehavior: Clip.hardEdge,
-            width: SizeConfig.blockSizeHorizontal*100,
-            height: SizeConfig.blockSizeVertical *30,
-            decoration: BoxDecoration(
-              boxShadow: [
-                BoxShadow(
-                  offset: Offset(0, 0),
-                  blurRadius: 2,
-                  spreadRadius: 2,
-                  color: Colors.black26,
-                ),
-              ],
-            ),
-            child: Image.asset("assets/images/fine-dining1.jpg", fit: BoxFit.cover,),
-          ),),
-          MultiSliver(children: [
-            SliverToBoxAdapter(
-              child: SizedBox(height: SizeConfig.blockSizeVertical * 3,),
-            ),
-            SliverToBoxAdapter(
-              child: TitleWidget(),
-            ),
-            SliverPinnedHeader(
-              child: SizedBox(height: SizeConfig.blockSizeVertical * 9,),
-            ),
-            SliverCrossAxisConstrained(maxCrossAxisExtent: SizeConfig.blockSizeHorizontal * 88,child: SliverPinnedHeader(child: SearchBarWidget(callBack: callBack,)))
-          ])
-        ],insetOnOverlap: false,),
-        SliverToBoxAdapter(child: Column(
+        SliverStack(
+          insetOnOverlap: false,
           children: [
-            CategoryWidget(),
-            PopularWidget()
+            SliverToBoxAdapter(
+              child: Container(
+                clipBehavior: Clip.hardEdge,
+                width: SizeConfig.blockSizeHorizontal * 100,
+                height: SizeConfig.blockSizeVertical * 40,
+                decoration: BoxDecoration(
+                  boxShadow: [
+                    BoxShadow(
+                      offset: Offset(0, 0),
+                      blurRadius: 2,
+                      spreadRadius: 2,
+                      color: Colors.black26,
+                    ),
+                  ],
+                ),
+                child: ColorFiltered(
+                  colorFilter: ColorFilter.mode(
+                      Colors.black.withOpacity(0.2), BlendMode.srcATop),
+                  child: Image.asset(
+                    "assets/images/fine-dining1.jpg",
+                    fit: BoxFit.cover,
+                  ),
+                ),
+              ),
+            ),
+            MultiSliver(children: [
+              SliverPinnedHeader(
+                child: SizedBox(
+                  height: MediaQueryData.fromWindow(window).padding.top,
+                ),
+              ),
+              SliverCrossAxisConstrained(
+                maxCrossAxisExtent: SizeConfig.blockSizeHorizontal * 30,
+                alignment: -0.5,
+                child: SliverToBoxAdapter(
+                  child: TitleWidget(),
+                ),
+              ),
+              SliverToBoxAdapter(
+                  child: SizedBox(
+                height: AppBar().preferredSize.height,
+                child: Align(
+                  alignment: Alignment.bottomCenter,
+                  child: Text(
+                    'Nos Restaurant',
+                    textAlign: TextAlign.left,
+                    style: TextStyle(
+                      fontWeight: FontWeight.bold,
+                      fontSize: fontTitleSize,
+                      letterSpacing: 0.27,
+                      color: kPrimaryColor,
+                    ),
+                  ),
+                ),
+              )),
+              SliverCrossAxisConstrained(
+                child: SliverPinnedHeader(
+                    child: SearchBarWidget(
+                  callBack: () {},
+                )),
+                maxCrossAxisExtent: SizeConfig.blockSizeHorizontal * 89,
+              )
+            ])
           ],
-        ),)
+        ),
+        SliverToBoxAdapter(
+          child: Column(
+            children: [AdsSection(), CategoryWidget(), PopularWidget()],
+          ),
+        )
       ],
     );
   }
 }
 
+class SliverAppBarHeader extends SliverPersistentHeaderDelegate {
+  var min;
 
+  SliverAppBarHeader({required this.min});
 
+  @override
+  Widget build(
+      BuildContext context, double shrinkOffset, bool overlapsContent) {
+    // TODO: implement build
+    return Column(
+      children: [
+        SizedBox(
+          height: SizeConfig.blockSizeVertical * 10,
+        ),
+        SearchBarWidget(callBack: () {}),
+      ],
+    );
+  }
 
+  @override
+  // TODO: implement maxExtent
+  double get maxExtent => AppBar().preferredSize.height * 3;
 
+  @override
+  // TODO: implement minExtent
+  double get minExtent => min;
+
+  @override
+  bool shouldRebuild(covariant SliverPersistentHeaderDelegate oldDelegate) {
+    // TODO: implement shouldRebuild
+    return false;
+  }
+}
